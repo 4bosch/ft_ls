@@ -15,7 +15,7 @@ void	list_files(char *path)
 	if (1) //si pas long format
 	print_files(files, 1);
 	else	// si long format 
-		return ; //print_long_files(files);
+		print_files(files, 0);
 	if(closedir(dirp) == -1)
 		return ;		//cas erreur a implementer
 }

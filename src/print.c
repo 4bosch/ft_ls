@@ -2,12 +2,16 @@
 
 void	print_files(t_list *lst, char c)
 {
-	while (lst != NULL)
+	if (c)
 	{
-		if (c)
+		while (lst != NULL)
+		{
 			ft_printf("%s\n", ((t_file*)(lst->content))->name);
-		else
-			continue ;
-		lst = lst->next;
+			lst = lst->next;
+		}
+	}
+	else
+	{
+		return ;
 	}
 }

@@ -49,7 +49,7 @@ SRC_TMP_NAME =	ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c ft_memmove.c\
 
 SRC_LST_NAME =  ft_lstnew.c ft_lstdelone.c ft_lstdel.c ft_lstadd.c			\
 				ft_lstiter.c ft_lstmap.c ft_lstgeti.c ft_lstswap.c			\
-				ft_lstlen.c
+				ft_lstlen.c	ft_lstsort.c
 
 SRC_STDIO_NAME =  args.c floats.c ft_printf.c integers.c output.c			\
 					parsing.c specifier.c type_base.c type_char.c			\

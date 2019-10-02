@@ -6,7 +6,7 @@
 /*   By: abosch <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 14:08:47 by abosch            #+#    #+#             */
-/*   Updated: 2019/04/10 16:58:52 by abosch           ###   ########.fr       */
+/*   Updated: 2019/10/02 16:52:46 by abosch           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,6 @@ t_list	*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 t_list	*ft_lstgeti(t_list *lst, int i);
 int		ft_lstlen(t_list *lst);
 void	ft_lstswap(t_list *lst, int a, int b);
-void	ft_lstquicksort(t_list **lst, int (*cmp)(t_list e1, t_list e2));
+t_list	**ft_lstquicksort(t_list **lst, int (*cmp)(t_list e1, t_list e2));
 
 #endif

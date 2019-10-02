@@ -3,6 +3,6 @@
 # include "shared.h"
 # include "libft.h"
 
-void	print_files(t_list *lst, char c);
+void	print_files(t_list **tab, char c);
 
 #endif

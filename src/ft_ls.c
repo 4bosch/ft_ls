@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_ls.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abosch <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/02 16:20:18 by abosch            #+#    #+#             */
+/*   Updated: 2019/10/02 16:54:19 by abosch           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_ls.h"
 
 // CAS D'ERREUR : opendir, closedir, readdir
@@ -7,7 +19,7 @@ void	list_files(char *path)
 	DIR				*dirp;
 	struct dirent	*ret;
 	t_list			*files;
-	int				(*cmp)(t_list e1, t_list e2);
+	t_list			**tab_files;
 
 	if(!(dirp = opendir(path)))
 		return ;		//Cas erreur a implementer
@@ -15,12 +27,11 @@ void	list_files(char *path)
 	while ((ret = readdir(dirp)))
 		ft_lstadd(&files, ft_lstnew(create_file(ret->d_name), sizeof(t_file)));
 	//parse option pour selectionner la fonction de comparaison qui convient
-	cmp = &name_sort;
-	ft_lstquicksort(&files, cmp);
+	tab_files = ft_lstquicksort(&files, &name_sort);
 	if (1) //si pas long format
-		print_files(files, 1);
+		print_files(tab_files, 1);
 	else	// si long format 
-		print_files(files, 0);
+		print_files(tab_files, 0);
 	if(closedir(dirp) == -1)
 		return ;		//cas erreur a implementer
 }

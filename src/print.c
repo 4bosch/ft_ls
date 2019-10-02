@@ -1,13 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abosch <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/02 16:20:27 by abosch            #+#    #+#             */
+/*   Updated: 2019/10/02 16:53:28 by abosch           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "print.h"
 
-void	print_files(t_list *lst, char c)
+void	print_files(t_list **tab, char c)
 {
+	int i;
+
 	if (c)
 	{
-		while (lst != NULL)
+		i = -1;
+		while (tab[++i] != NULL)
 		{
-			ft_printf("%s\n", ((t_file*)(lst->content))->name);
-			lst = lst->next;
+			ft_printf("%s\n", ((t_file*)tab[i]->content)->name);
 		}
 	}
 	else

@@ -7,13 +7,16 @@ void	list_files(char *path)
 	DIR				*dirp;
 	struct dirent	*ret;
 	t_list			*files;
+	int				(*cmp)(t_list e1, t_list e2);
 
 	if(!(dirp = opendir(path)))
 		return ;		//Cas erreur a implementer
 	files = ft_lstnew(create_file(readdir(dirp)->d_name), sizeof(t_file));
 	while ((ret = readdir(dirp)))
 		ft_lstadd(&files, ft_lstnew(create_file(ret->d_name), sizeof(t_file)));
-	//fonction de sort
+	//parse option pour selectionner la fonction de comparaison qui convient
+	cmp = &name_sort;
+	ft_lstquicksort(&files, cmp);
 	if (1) //si pas long format
 		print_files(files, 1);
 	else	// si long format 

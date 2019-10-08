@@ -25,15 +25,13 @@ t_file		*create_file(char *name)
 	return (ret);
 }
 
-int			name_sort(t_list e1, t_list e2)
+int			name_cmp(t_list e1, t_list e2)
 {
-	char	*name1;
-	char	*name2;
+	return((ft_strcmp(((t_file*)e1.content)->name, ((t_file*)e2.content)->name) < 0) ? 1 : 0);
+}
 
-	name1 = ((t_file*)e1.content)->name;
-	name2 = ((t_file*)e2.content)->name;
-	if (ft_strcmp(name1, name2) < 0)
-		return (1);
-	else
-		return (0);
+int			time_cmp(t_list e1, t_list e2)
+{
+	e1 = e2;
+	return(0);
 }

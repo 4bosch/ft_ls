@@ -27,7 +27,7 @@ void	list_files(char *path)
 	while ((ret = readdir(dirp)))
 		ft_lstadd(&files, ft_lstnew(create_file(ret->d_name), sizeof(t_file)));
 	//parse option pour selectionner la fonction de comparaison qui convient
-	tab_files = ft_lstquicksort(&files, &name_sort);
+	tab_files = ft_lstquicksort(&files, &name_cmp);
 	if (1) //si pas long format
 		print_files(tab_files, 1);
 	else	// si long format 

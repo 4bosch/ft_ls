@@ -12,20 +12,20 @@
 
 #include "print.h"
 
-void	print_files(t_list **tab, char c)
+static void	long_print(t_file *file)
+{
+	file = NULL;
+}
+
+void		print_files(t_list **tab, char bool)
 {
 	int i;
 
-	if (c)
-	{
-		i = -1;
+	i = -1;
+	if (bool)
 		while (tab[++i] != NULL)
-		{
 			ft_printf("%s\n", ((t_file*)tab[i]->content)->name);
-		}
-	}
 	else
-	{
-		return ;
-	}
+		while (tab[++i] != NULL)
+			long_print((t_file*)tab[i]->content);
 }

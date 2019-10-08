@@ -4,6 +4,7 @@
 # include "libft.h"
 
 t_file		*create_file(char *name);
-int			name_sort(t_list e1, t_list e2);
+int			name_cmp(t_list e1, t_list e2);
+int			time_cmp(t_list e1, t_list e2);
 
 #endif

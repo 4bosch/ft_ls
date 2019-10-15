@@ -29,7 +29,7 @@ void	list_files(char *path)
 	//parse option pour selectionner la fonction de comparaison qui convient
 	tab_files = ft_lstquicksort(&files, &time_cmp);
 	if (1) //si pas long format
-		print_files(tab_files, 1);
+		print_files(tab_files, 0);
 	else	// si long format 
 		print_files(tab_files, 0);
 	if(closedir(dirp) == -1)

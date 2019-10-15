@@ -9,11 +9,10 @@
 
 typedef struct		s_max
 {
-	int	nlink;
-	int	user;
-	int	group;
-	int	size;
-	int	name;
+	size_t		nlink;
+	size_t		user;
+	size_t		group;
+	long long	size;
 }			t_max;
 
 void	print_files(t_list **tab, char c);

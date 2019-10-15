@@ -14,7 +14,7 @@
 
 static void	long_print(t_file *file, t_max max)
 {
-	
+	printf("\n");
 }
 
 static void	init_max(t_max *max)
@@ -23,13 +23,24 @@ static void	init_max(t_max *max)
 	max->user = 0;
 	max->group = 0;
 	max->size = 0;
-	max->name = 0;
+}
+
+static int	ilen(size_t nb)
+{
+	int i;
+	i = 0;
+	while (nb > 0)
+	{
+		nb /= 10;
+		i++;
+	}
+	return (i);
 }
 
 static void	fill_max(t_list **tab, t_max *max)
 {
 	int		i;
-	int		len;
+	size_t		len;
 
 	i = -1;
 	while (tab[++i] != NULL)
@@ -44,10 +55,10 @@ static void	fill_max(t_list **tab, t_max *max)
 			max->group = len;
 		if (max->size < ((t_file*)tab[i]->content)->sbuf.st_size)
 			max->size = ((t_file*)tab[i]->content)->sbuf.st_size;
-		len = ft_strlen(((t_file*)tab[i]->content)->name);
-		if (max->name < len)
-			max->name = len;
-	}	
+	}
+	max->nlink = ilen(max->nlink);
+	max->size = ilen(max->size);
+	printf("%zu, %zu, %zu, %lld\n",max->nlink, max->user, max->group, max->size);
 }
 
 void		print_files(t_list **tab, char bool)
@@ -62,7 +73,8 @@ void		print_files(t_list **tab, char bool)
 	{
 		init_max(&max);
 		fill_max(tab, &max);
-		while (tab[++i] != NULL)
+		/*while (tab[++i] != NULL)
 			long_print((t_file*)tab[i]->content, max);
+	*/
 	}
 }

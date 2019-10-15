@@ -12,20 +12,57 @@
 
 #include "print.h"
 
-static void	long_print(t_file *file)
+static void	long_print(t_file *file, t_max max)
 {
-	file = NULL;
+	
+}
+
+static void	init_max(t_max *max)
+{
+	max->nlink = 0;
+	max->user = 0;
+	max->group = 0;
+	max->size = 0;
+	max->name = 0;
+}
+
+static void	fill_max(t_list **tab, t_max *max)
+{
+	int		i;
+	int		len;
+
+	i = -1;
+	while (tab[++i] != NULL)
+	{
+		if (max->nlink < ((t_file*)tab[i]->content)->sbuf.st_nlink)
+			max->nlink = ((t_file*)tab[i]->content)->sbuf.st_nlink;
+		len = ft_strlen(getpwuid(((t_file*)tab[i]->content)->sbuf.st_uid)->pw_name);
+		if (max->user < len)
+			max->user = len;
+		len = ft_strlen(getgrgid(((t_file*)tab[i]->content)->sbuf.st_gid)->gr_name);
+		if (max->group < len)
+			max->group = len;
+		if (max->size < ((t_file*)tab[i]->content)->sbuf.st_size)
+			max->size = ((t_file*)tab[i]->content)->sbuf.st_size;
+		len = ft_strlen(((t_file*)tab[i]->content)->name);
+		if (max->name < len)
+			max->name = len;
+	}	
 }
 
 void		print_files(t_list **tab, char bool)
 {
-	int i;
-
+	int	i;
+	t_max	max;
 	i = -1;
 	if (bool)
 		while (tab[++i] != NULL)
 			ft_printf("%s\n", ((t_file*)tab[i]->content)->name);
 	else
+	{
+		init_max(&max);
+		fill_max(tab, &max);
 		while (tab[++i] != NULL)
-			long_print((t_file*)tab[i]->content);
+			long_print((t_file*)tab[i]->content, max);
+	}
 }

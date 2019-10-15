@@ -12,11 +12,6 @@
 
 #include "print.h"
 
-static void	long_print(t_file *file, t_max max)
-{
-	printf("\n");
-}
-
 static void	init_max(t_max *max)
 {
 	max->nlink = 0;
@@ -73,8 +68,7 @@ void		print_files(t_list **tab, char bool)
 	{
 		init_max(&max);
 		fill_max(tab, &max);
-		/*while (tab[++i] != NULL)
+		while (tab[++i] != NULL)
 			long_print((t_file*)tab[i]->content, max);
-	*/
 	}
 }

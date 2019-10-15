@@ -16,5 +16,6 @@ typedef struct		s_max
 }			t_max;
 
 void	print_files(t_list **tab, char c);
+void	long_print(t_file *file, t_max max);
 
 #endif

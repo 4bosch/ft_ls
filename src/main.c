@@ -36,15 +36,19 @@ void	list_files(char *path)
 		return ;		//cas erreur a implementer
 }
 
+void	get_options(int ac, char **av, int16_t *opt)
+{
+	int		i;
+
+	i = 0;
+	while (++i < ac || ac[i][0] != '-')
+		
+}
+
 int		main(int ac, char **av)
 {
-	if (ac == 1)  //ls sans args
-	{
-		list_files("./");
-	}
-	else	//ls avec args
-		return (1);
-	if (av[0][0] == 0)
-		return (0);
-	return (0);
+	int16_t	options;
+
+	options = 0;
+	get_options(ac, av, &options);
 }

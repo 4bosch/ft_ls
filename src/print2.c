@@ -1,4 +1,11 @@
-# include "print.h"
+//0000000000000000000000000000000000000000000000000000000000000000000000000000
+#include "print.h"
+
+#include <time.h>
+
+#define TEN_MILENIA 253402297200
+#define SIX_MONTHS 15778800
+
 
 static void	permissions(t_file *file)
 {
@@ -29,6 +36,24 @@ static void	permissions(t_file *file)
 
 void		long_print(t_file *file, t_max max)
 {
+	time_t	now;
+	time_t	mtime;
+	char	*date;
+
+	now = time(0);
+	mtime = file->sbuf.st_mtimespec.tv_sec;
 	permissions(file);
-	ft_printf("  %*d %*s  %*s  %*lld %s\n",max.nlink, file->sbuf.st_nlink, max.user, getpwuid(file->sbuf.st_uid)->pw_name, max.group, getgrgid(file->sbuf.st_gid)->gr_name, max.size, file->sbuf.st_size, file->name);
+	ft_printf("  %*d %*s  %*s  %*lld ",max.nlink, file->sbuf.st_nlink,
+			max.user, getpwuid(file->sbuf.st_uid)->pw_name, max.group,
+			getgrgid(file->sbuf.st_gid)->gr_name, max.size,
+			file->sbuf.st_size);
+	date = ctime(&mtime) + 4;
+	if (mtime >= TEN_MILENIA)
+		ft_printf("%.7s %.5s ", date, date + 20);
+	else if ((now - mtime) > SIX_MONTHS
+			|| (now < mtime))
+		ft_printf("%.7s%5.4s ", date, date + 16);
+	else
+		ft_printf("%.7s%5.5s ", date, date + 7);
+	ft_printf("%s\n", file->name);
 }

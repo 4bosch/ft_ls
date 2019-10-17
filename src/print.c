@@ -18,6 +18,7 @@ static void	init_max(t_max *max)
 	max->user = 0;
 	max->group = 0;
 	max->size = 0;
+	max->sum = 0;
 }
 
 static int	ilen(size_t nb)
@@ -53,13 +54,16 @@ static void	fill_max(t_list **tab, t_max *max)
 	}
 	max->nlink = ilen(max->nlink);
 	max->size = ilen(max->size);
-	printf("%zu, %zu, %zu, %lld\n",max->nlink, max->user, max->group, max->size);
+	i = -1;
+	while (tab[++i] != NULL)
+		max->sum += ((t_file *)tab[i]->content)->sbuf.st_blocks;
 }
 
 void		print_files(t_list **tab, char bool)
 {
 	int	i;
 	t_max	max;
+
 	i = -1;
 	if (bool)
 		while (tab[++i] != NULL)
@@ -68,6 +72,7 @@ void		print_files(t_list **tab, char bool)
 	{
 		init_max(&max);
 		fill_max(tab, &max);
+		ft_printf("total %llu\n", max.sum);
 		while (tab[++i] != NULL)
 			long_print((t_file*)tab[i]->content, max);
 	}

@@ -13,6 +13,7 @@ typedef struct		s_max
 	size_t		user;
 	size_t		group;
 	long long	size;
+	size_t		sum;
 }			t_max;
 
 void	print_files(t_list **tab, char c);

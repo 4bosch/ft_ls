@@ -50,3 +50,13 @@ int			time_cmp(t_list e1, t_list e2)
 	else
 		return (0);
 }
+
+int			rname_cmp(t_list e1, t_list e2)
+{
+	return (name_cmp(e2, e1));
+}
+
+int			rtime_cmp(t_list e1, t_list e2)
+{
+	return (time_cmp(e2, e1));
+}

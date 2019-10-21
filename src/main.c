@@ -11,10 +11,30 @@
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+#include "option.h"
 
 // CAS D'ERREUR : opendir, closedir, readdir
 // MALLOC A GERER : lstnew, create_file
-void	list_files(char *path)
+
+static t_list	**sort(t_list *files, int16_t opt)
+{
+	if (opt & O_REVERSE)
+	{
+		if (opt & O_TIME)
+			return (ft_lstquicksort(&files, &rtime_cmp));
+		else
+			return (ft_lstquicksort(&files, &rname_cmp));
+	}
+	else
+	{
+		if (opt & O_TIME)
+			return (ft_lstquicksort(&files, &time_cmp));
+		else
+			return (ft_lstquicksort(&files, &name_cmp));
+	}
+}
+
+static void		list_files(char *path, int16_t opt)
 {
 	DIR				*dirp;
 	struct dirent	*ret;
@@ -27,28 +47,23 @@ void	list_files(char *path)
 	while ((ret = readdir(dirp)))
 		ft_lstadd(&files, ft_lstnew(create_file(ret->d_name), sizeof(t_file)));
 	//parse option pour selectionner la fonction de comparaison qui convient
-	tab_files = ft_lstquicksort(&files, &time_cmp);
-	if (1) //si pas long format
+	tab_files = sort(files, opt);
+	if (opt & O_LFORMAT) //si pas long format
 		print_files(tab_files, 0);
 	else	// si long format 
-		print_files(tab_files, 0);
+		print_files(tab_files, 1);
 	if(closedir(dirp) == -1)
 		return ;		//cas erreur a implementer
 }
 
-void	get_options(int ac, char **av, int16_t *opt)
-{
-	int		i;
 
-	i = 0;
-	while (++i < ac || ac[i][0] != '-')
-		
-}
-
-int		main(int ac, char **av)
+int			main(int ac, char **av)
 {
 	int16_t	options;
+	t_list	*dir;
 
 	options = 0;
-	get_options(ac, av, &options);
+	dir = get_options(ac, av, &options);
+	printf("%d\n", options);
+	list_files((char*)dir->content, options);
 }

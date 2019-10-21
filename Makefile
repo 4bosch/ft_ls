@@ -27,7 +27,7 @@ OPTIFLAGS = -O3
 #					SOURCES					  #
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 SRC_PATH = src
-SRC_NAME = print.c utils.c ft_ls.c print2.c
+SRC_NAME = print.c utils.c main.c print2.c option.c
 
 SRC :=	$(addprefix $(SRC_PATH)/,$(SRC_NAME))
 

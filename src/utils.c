@@ -11,52 +11,40 @@
 /* ************************************************************************** */
 
 #include "utils.h"
-#include <stdio.h> /////////////////////////DELETE
 
-t_file		*create_file(char *name)
+void	create_file(char *name, t_list **list, int16_t opt)
 {
-	t_file	*ret;
+	t_file	*file;
+	char	linkbuf[1024];
+	int		r;
 
-	if (!(ret = (t_file*)malloc(sizeof(t_file))))
-		return (NULL);
-	ret->name = ft_strnew(ft_strlen(name));
-	ft_strcpy(ret->name, name);
-	lstat(name, &(ret->sbuf));
-	return (ret);
-}
-
-int			name_cmp(t_list e1, t_list e2)
-{
-	return((ft_strcmp(((t_file*)e1.content)->name, ((t_file*)e2.content)->name) < 0) ? 1 : 0);
-}
-
-int			time_cmp(t_list e1, t_list e2)
-{
-	int diff;
-
-	diff = ((t_file*)e1.content)->sbuf.st_mtimespec.tv_sec - ((t_file*)e2.content)->sbuf.st_mtimespec.tv_sec;
-	if (diff == 0)
+	if (!(opt & O_ALL) && *name == '.')
+		return ;
+	if (!(file = (t_file*)malloc(sizeof(t_file))))
+		ft_puterr("Malloc failed\n", 2);
+	lstat(name, &(file->sbuf));
+	if ((opt & O_LFORMAT) && ((file->sbuf.st_mode & S_IFMT) == S_IFLNK))
 	{
-		diff = ((t_file*)e1.content)->sbuf.st_mtimespec.tv_nsec - ((t_file*)e2.content)->sbuf.st_mtimespec.tv_nsec;
-		if (diff == 0)
-			return (name_cmp(e1, e2));
-		else if (diff > 0)
-			return (1);
-		else
-			return (0);
+		r = readlink(file->name, linkbuf, 1024);
+		if (r < 0)
+		{
+			ft_puterr("ft_ls: readlink: ", 2);
+			ft_puterr(strerror(errno), 2);
+			ft_putchar('\n');
+		}
+		linkbuf[r] = '\0';
+		file->name = ft_strnew(ft_strlen(name) + r + 5);
+		file->name = ft_strcpy(file->name, name);
+		file->name = ft_strcat(ft_strcat(file->name, " -> "), linkbuf);
 	}
-	else if (diff > 0)
-		return (1);
 	else
-		return (0);
+	{
+		file->name = ft_strnew(ft_strlen(name));
+		ft_strcpy(file->name, name);
+	}
+	if (*list == NULL)
+		*list = ft_lstnew(file, sizeof(t_file));
+	else
+		ft_lstadd(list, ft_lstnew(file, sizeof(t_file)));
 }
 
-int			rname_cmp(t_list e1, t_list e2)
-{
-	return (name_cmp(e2, e1));
-}
-
-int			rtime_cmp(t_list e1, t_list e2)
-{
-	return (time_cmp(e2, e1));
-}

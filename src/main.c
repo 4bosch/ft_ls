@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-#include "option.h"
 
 // CAS D'ERREUR : opendir, closedir, readdir
 // MALLOC A GERER : lstnew, create_file
@@ -43,12 +42,11 @@ static void		list_files(char *path, int16_t opt)
 
 	if(!(dirp = opendir(path)))
 		return ;		//Cas erreur a implementer
-	files = ft_lstnew(create_file(readdir(dirp)->d_name), sizeof(t_file));
+	create_file(readdir(dirp)->d_name, &files, opt);
 	while ((ret = readdir(dirp)))
-		ft_lstadd(&files, ft_lstnew(create_file(ret->d_name), sizeof(t_file)));
-	//parse option pour selectionner la fonction de comparaison qui convient
+		create_file(ret->d_name, &files, opt);
 	tab_files = sort(files, opt);
-	if (opt & O_LFORMAT) //si pas long format
+	if (opt & O_LFORMAT) 
 		print_files(tab_files, 0);
 	else	// si long format 
 		print_files(tab_files, 1);
@@ -64,6 +62,5 @@ int			main(int ac, char **av)
 
 	options = 0;
 	dir = get_options(ac, av, &options);
-	printf("%d\n", options);
 	list_files((char*)dir->content, options);
 }

@@ -25,6 +25,7 @@ t_list		*get_options(int ac, char **av, int16_t *opt)
 {
 	int		i;
 	int		j;
+	t_list	*dir;
 
 	i = 0;
 	while (++i < ac && av[i][0] == '-')
@@ -32,6 +33,14 @@ t_list		*get_options(int ac, char **av, int16_t *opt)
 		j = 0;
 		while (av[i][++j] != '\0')
 			active_options(av[i][j], opt);
-	}	
-	return (ft_lstnew(ft_strdup("./"), sizeof(char) * 3));
+	}
+	if (i == ac)
+		return (ft_lstnew("./", sizeof(char) * 3));
+	dir = NULL;
+	while (i < ac)
+	{
+		ft_lstadd(&dir, ft_lstnew(av[i], sizeof(char) * (ft_strlen(av[i]) + 1)));
+		i++;
+	}
+	return (dir);
 }

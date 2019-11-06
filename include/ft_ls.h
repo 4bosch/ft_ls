@@ -9,4 +9,6 @@
 # include "cmp.h"
 # include <dirent.h>
 
+void     list_files(char *path, int16_t opt);
+
 #endif

@@ -11,8 +11,22 @@
 /* ************************************************************************** */
 
 #include "utils.h"
+#include <errno.h>
 
-void	create_file(char *name, t_list **list, int16_t opt)
+static void	status(char *path, char *name, t_file *file)
+{
+	char	*tmp;
+
+	tmp = ft_strnew(ft_strlen(path) + ft_strlen(name) + 1);
+	ft_strcpy(tmp, path);
+	if (strcmp("./", path) != 0)
+		ft_strcat(tmp, "/");
+	ft_strcat(tmp, name);
+	if((lstat(tmp, &file->sbuf)) == -1)
+		perror(strerror(errno));
+}
+
+void		create_file(char *path, char *name, t_list **list, int16_t opt)
 {
 	t_file	*file;
 	char	linkbuf[1024];
@@ -22,7 +36,7 @@ void	create_file(char *name, t_list **list, int16_t opt)
 		return ;
 	if (!(file = (t_file*)malloc(sizeof(t_file))))
 		ft_puterr("Malloc failed\n", 2);
-	lstat(name, &(file->sbuf));
+	status(path, name, file);
 	if ((opt & O_LFORMAT) && ((file->sbuf.st_mode & S_IFMT) == S_IFLNK))
 	{
 		r = readlink(file->name, linkbuf, 1024);
@@ -47,4 +61,3 @@ void	create_file(char *name, t_list **list, int16_t opt)
 	else
 		ft_lstadd(list, ft_lstnew(file, sizeof(t_file)));
 }
-

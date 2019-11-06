@@ -73,26 +73,12 @@ static void		quicksort(t_list **tab, int low, int high, int (*cmp)(t_list e1, t_
 t_list			**ft_lstquicksorttab(t_list **lst, int (*cmp)(t_list e1, t_list e2))
 {
 	t_list	**tab;
-	t_list	*tmp;
 	int		len;
 
-	ft_printf("=============== quicksort tab ============\n");
 	if (lst != NULL && cmp != NULL)
 	{
-		ft_printf("les pointeurs ne sont pas null cool\n");
-		ft_printf("\n---------- LIST -----------\n");
-		tmp = *lst;
-		while (tmp != NULL)
-		{
-			ft_printf("add |%p| |%s|\n",tmp, ((t_file*)tmp->content)->name);
-			ft_printf("next : %p\n", tmp->next);
-			tmp = tmp->next;
-		}
-		ft_printf("----------------FIN-------------\n");
-		
 		if ((len = ft_lstlen(*lst)) <= 0)
 			return (NULL); //cas d'erreur a gerer
-		ft_printf("\nla longueur est %d\n\n", len);
 		tab = lst2tab(*lst);
 		quicksort(tab, 0, len - 1, cmp);
 		tab[len] = NULL;

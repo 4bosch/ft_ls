@@ -1,4 +1,5 @@
 #include "option.h"
+#include "utils.h"
 
 static void	active_options(char op, int16_t *opt)
 {
@@ -34,12 +35,15 @@ t_list		*get_options(int ac, char **av, int16_t *opt)
 		while (av[i][++j] != '\0')
 			active_options(av[i][j], opt);
 	}
-	if (i == ac)
-		return (ft_lstnew("./", sizeof(char) * 3));
 	dir = NULL;
+	if (i == ac)
+	{
+		create_dir("./", 0, 2, &dir);
+		return (dir);
+	}
 	while (i < ac)
 	{
-		ft_lstadd(&dir, ft_lstnew(av[i], sizeof(char) * (ft_strlen(av[i]) + 1)));
+		create_dir(av[i], 0, ft_strlen(av[i]), &dir);
 		i++;
 	}
 	return (dir);

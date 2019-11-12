@@ -27,12 +27,13 @@ void     list_files(char *path, int16_t opt)
 
     files = NULL;
     if(!(dirp = opendir(path)))
-        return ;        //Cas erreur a implementer
+		ft_puterr(strerror(errno), 2);
     create_file(path, readdir(dirp)->d_name, &files, opt);
     while ((ret = readdir(dirp)))
+	{
         create_file(path, ret->d_name, &files, opt);
+	}
     tab_files = sort(&files, opt);
-    //ft_printf("after sort\n");
     if (opt & O_LFORMAT)
         print_files(tab_files, 0);
     else    // si long format

@@ -8,6 +8,7 @@
 # include "libft.h"
 # include "option.h"
 
-void	create_file(char *path, char *name, t_list **list, int16_t);
+void	create_file(char *path, char *name, t_list **list, int16_t option);
+void	create_dir(char *name,int path_len, int name_len, t_list **list);
 
 #endif

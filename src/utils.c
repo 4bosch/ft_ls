@@ -11,25 +11,40 @@
 /* ************************************************************************** */
 
 #include "utils.h"
+#include "shared.h"
 #include <errno.h>
 
 static void	status(char *path, char *name, t_file *file)
 {
 	char	*tmp;
+	uint8_t	off;
 
-	tmp = ft_strnew(ft_strlen(path) + ft_strlen(name) + 1);
+	off = 0;
+	file->path_len = ft_strlen(path);
+	file->name_len = ft_strlen(name);
+	tmp = ft_strnew(file->name_len + file->path_len + 1);
 	ft_strcpy(tmp, path);
 	if (strcmp("./", path) != 0)
+	{
 		ft_strcat(tmp, "/");
+		file->path_len++;
+	}
+	else
+		off = 2;
 	ft_strcat(tmp, name);
 	if((lstat(tmp, &file->sbuf)) == -1)
 		perror(strerror(errno));
+	file->name = ft_strnew(file->path_len + file->name_len - off);
+	ft_strcpy(file->name, tmp + off);
+	file->path_len -= off;
+	free(tmp);
 }
 
 void		create_file(char *path, char *name, t_list **list, int16_t opt)
 {
 	t_file	*file;
 	char	linkbuf[1024];
+	char	*tmp;
 	int		r;
 
 	if (!(opt & O_ALL) && *name == '.')
@@ -47,17 +62,37 @@ void		create_file(char *path, char *name, t_list **list, int16_t opt)
 			ft_putchar('\n');
 		}
 		linkbuf[r] = '\0';
-		file->name = ft_strnew(ft_strlen(name) + r + 5);
-		file->name = ft_strcpy(file->name, name);
-		file->name = ft_strcat(ft_strcat(file->name, " -> "), linkbuf);
-	}
-	else
-	{
-		file->name = ft_strnew(ft_strlen(name));
-		ft_strcpy(file->name, name);
+		tmp = ft_strnew(ft_strlen(file->name) + r + 5);
+		ft_strcpy(tmp, file->name);
+		ft_strcat(ft_strcat(tmp, " -> "), linkbuf);
+		free(file->name);
+		file->name = tmp;
+		file->name_len += r + 5;
 	}
 	if (*list == NULL)
 		*list = ft_lstnew(file, sizeof(t_file));
 	else
 		ft_lstadd(list, ft_lstnew(file, sizeof(t_file)));
+}
+
+void		create_dir(char *name, int path_len, int name_len, t_list **list)
+{
+	t_dir	*dir;
+
+	if (!(dir = (t_dir*)malloc(sizeof(t_dir))))
+		ft_puterr("Malloc failed\n", 2);
+	dir->path_len = path_len;
+	dir->name_len = name_len;
+	if (ft_strcmp("./", name) == 0)
+	{
+		dir->name = ft_strnew(2);
+		ft_strcpy(dir->name, name);
+	}
+	else
+	{
+		dir->name = ft_strnew(dir->path_len + dir->name_len + 1);
+		ft_strcpy(dir->name, name);
+		ft_strcat(dir->name, "/");
+	}
+	ft_lstadd(list, ft_lstnew(dir, sizeof(dir)));
 }

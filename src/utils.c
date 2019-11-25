@@ -24,7 +24,7 @@ static void	status(char *path, char *name, t_file *file)
 	file->name_len = ft_strlen(name);
 	tmp = ft_strnew(file->name_len + file->path_len + 1);
 	ft_strcpy(tmp, path);
-	if (strcmp("./", path) != 0)
+	if (ft_strcmp("./", path) != 0)
 	{
 		ft_strcat(tmp, "/");
 		file->path_len++;

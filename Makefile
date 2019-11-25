@@ -90,12 +90,12 @@ lclean:
 lfclean:
 	@make -C $(LIB_PD) fclean
 
-clean:
+clean: lclean
 	@rm -f $(OBJ)
 	@rmdir $(OBJ_PATH) 2> /dev/null || true
 
-fclean: clean
-	@rm -f $(CHECKER) $(PUSH)
+fclean: clean lfclean
+	@rm -f $(NAME)
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 #					OTHER					 #

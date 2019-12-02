@@ -40,5 +40,5 @@ int			main(int ac, char **av)
 			dir = dir->next;
 		}
 	}
-	return (0);
+	return (1);
 }

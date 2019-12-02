@@ -54,5 +54,5 @@ void		long_print(t_file *file, t_max max)
 		ft_printf("%.7s%5.4s ", date, date + 16);
 	else
 		ft_printf("%.7s%5.5s ", date, date + 7);
-	ft_printf("%s\n", file->name);
+	ft_printf("%s\n", file->name + file->path_len);
 }

@@ -1,19 +1,6 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   specifier.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: abaisago <adam_bai@protonmail.com>         +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/07 18:37:09 by abaisago          #+#    #+#             */
-/*   Updated: 2019/04/10 15:27:45 by abosch           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include "internal/shared.h"
-
 #include "internal/args.h"
 #include "internal/integers.h"
+#include "internal/percent.h"
 #include "internal/specifier.h"
 
 #include <string.h>
@@ -83,15 +70,24 @@ char	get_spec_size_two(char **str, char size)
 void	get_specifier(t_spec *spec, char **str, va_list ap)
 {
 	spec->flags = 0;
+	spec->width = 0;
 	spec->precision = 0;
 	spec->size = 0;
 	get_spec_flags(spec, str);
-	spec->width = switch_number_star(ap, spec, str);
+	while (**str == '*' || (**str >= '0' && **str <= '9'))
+		spec->width = switch_number_star(ap, str);
+	if (spec->width < 0)
+	{
+		spec->flags |= F_MINUS;
+		spec->width = -spec->width;
+	}
 	if (**str == '.')
 	{
 		++(*str);
 		spec->flags |= F_PRECI;
-		spec->precision = switch_number_star(ap, spec, str);
+		spec->precision = switch_number_star(ap, str);
+		if (spec->precision < 0)
+			spec->flags &= ~F_PRECI;
 	}
 	if ((spec->size = get_spec_size_two(str, spec->size)) == 0)
 		spec->size = get_spec_size_one(str, spec->size);

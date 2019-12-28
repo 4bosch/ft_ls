@@ -1,19 +1,8 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   type_base.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: abaisago <adam_bai@protonmail.com>         +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/22 17:14:50 by abaisago          #+#    #+#             */
-/*   Updated: 2019/04/10 15:28:12 by abosch           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include "ft/tmp.h"
+#include "libft.h"
 
 #include "internal/integers.h"
 #include "internal/output.h"
+#include "internal/percent.h"
 #include "internal/type_utils.h"
 
 #include <stdint.h>
@@ -42,7 +31,7 @@ void	type_o(va_list ap, t_spec *spec, t_buf *buf)
 	}
 	else
 		spec->flags &= ~F_HASH;
-	write_spec(buf, spec, &conv);
+	write_percent(spec, &conv, buf);
 }
 
 void	type_x(va_list ap, t_spec *spec, t_buf *buf)
@@ -67,7 +56,7 @@ void	type_x(va_list ap, t_spec *spec, t_buf *buf)
 	}
 	else
 		spec->flags &= ~F_HASH;
-	write_spec(buf, spec, &conv);
+	write_percent(spec, &conv, buf);
 }
 
 void	type_xx(va_list ap, t_spec *spec, t_buf *buf)
@@ -96,7 +85,7 @@ void	type_xx(va_list ap, t_spec *spec, t_buf *buf)
 	while (conv.str[++nbr] != '\0')
 		if (conv.str[nbr] >= 'a' && conv.str[nbr] <= 'f')
 			conv.str[nbr] -= 32;
-	write_spec(buf, spec, &conv);
+	write_percent(spec, &conv, buf);
 }
 
 void	type_b(va_list ap, t_spec *spec, t_buf *buf)
@@ -108,16 +97,16 @@ void	type_b(va_list ap, t_spec *spec, t_buf *buf)
 
 	nbr = get_cast_arg_unsigned(ap, spec->size);
 	conv.str = ft_lluitosa_base(nbr, 2, str);
-	conv.len = ft_strlen(conv.str);
 	if (spec->flags & F_QUOTE)
 		conv.str = nbr_grouping(&conv, ' ', 4);
+	conv.len = ft_strlen(conv.str);
 	spec->flags &= ~(F_PLUS | F_BLANK);
 	if (spec->flags & F_HASH)
 	{
 		spec->prefix = ft_strcpy(prefix, "b");
 		spec->prefix_len = 2;
 	}
-	write_spec(buf, spec, &conv);
+	write_percent(spec, &conv, buf);
 	if (spec->flags & F_QUOTE)
 		free(conv.str);
 }
@@ -133,5 +122,5 @@ void	type_bb(va_list ap, t_spec *spec, t_buf *buf)
 	conv.str = ft_lluitoa_base(nbr, base);
 	conv.len = ft_strlen(conv.str);
 	spec->flags &= ~(F_PLUS | F_BLANK | F_HASH);
-	write_spec(buf, spec, &conv);
+	write_percent(spec, &conv, buf);
 }

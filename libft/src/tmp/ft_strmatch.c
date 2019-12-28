@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   integers.h                                         :+:      :+:    :+:   */
+/*   strings.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abaisago <adam_bai@protonmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/12 19:01:06 by abaisago          #+#    #+#             */
-/*   Updated: 2019/03/20 18:47:19 by abaisago         ###   ########.fr       */
+/*   Created: 2019/03/27 19:21:32 by abaisago          #+#    #+#             */
+/*   Updated: 2019/04/01 17:31:58 by abaisago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INTEGERS_H
-# define INTEGERS_H
-# define INT_MAX 2147483647
-# include "libft.h"
+#include "libft.h"
 
-int		get_number(char **str);
-char	*nbr_grouping(t_string *conv, char sep, unsigned int size);
+int8_t		ft_strmatch(char *match, char *str)
+{
+	size_t	i;
 
-/*
-** INTEGERS_H
-*/
-#endif
+	i = 0;
+	while (match[i] != '\0')
+	{
+		if (match[i] != str[i])
+			return (0);
+		++i;
+	}
+	return (1);
+}

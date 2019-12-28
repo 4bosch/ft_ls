@@ -6,12 +6,17 @@
 /*   By: abaisago <adam_bai@protonmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/16 11:15:37 by abaisago          #+#    #+#             */
-/*   Updated: 2019/03/16 11:31:27 by abaisago         ###   ########.fr       */
+/*   Updated: 2019/03/30 02:39:11 by abaisago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft/tmp.h"
+#include "libft.h"
 #include <string.h>
+
+/*
+** Computes the necessary lenth in bytes that
+** a wchar string would need in UTF-8 encoding.
+*/
 
 size_t	ft_wstr_utfelen(wchar_t *str)
 {

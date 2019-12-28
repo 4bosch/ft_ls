@@ -1,18 +1,5 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   integers.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: abaisago <adam_bai@protonmail.com>         +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/12 18:50:07 by abaisago          #+#    #+#             */
-/*   Updated: 2019/04/10 15:26:16 by abosch           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "internal/integers.h"
-#include "ft/tmp.h"
-#include "internal/shared.h"
+#include "libft.h"
 
 #include <stdlib.h>
 
@@ -46,13 +33,13 @@ char	*nbr_grouping(t_string *conv, char sep, unsigned int size)
 	if ((new = ft_strnew(conv->len + nsep)) == NULL)
 		return (NULL);
 	ft_strcpy(new + i + nsep, conv->str + i);
-	j = -1;
-	while (++j < size && --i > 0)
+	j = 0;
+	while (--i > 0)
 	{
 		new[i + nsep] = conv->str[i];
-		if (j == size - 1 && i > 0)
+		if (++j == size)
 		{
-			j = -1;
+			j = 0;
 			new[i + --nsep] = sep;
 		}
 	}

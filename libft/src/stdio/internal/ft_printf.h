@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   integers.h                                         :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abaisago <adam_bai@protonmail.com>         +#+  +:+       +#+        */
+/*   By: abosch <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/12 19:01:06 by abaisago          #+#    #+#             */
-/*   Updated: 2019/03/20 18:47:19 by abaisago         ###   ########.fr       */
+/*   Created: 2019/02/04 14:17:52 by abosch            #+#    #+#             */
+/*   Updated: 2019/04/19 15:22:30 by abaisago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INTEGERS_H
-# define INTEGERS_H
-# define INT_MAX 2147483647
-# include "libft.h"
+#ifndef FT_PRINTF_H
 
-int		get_number(char **str);
-char	*nbr_grouping(t_string *conv, char sep, unsigned int size);
+# define FT_PRINTF_H
+# include <stdarg.h>
+# define BUFF_SIZE	1024
 
-/*
-** INTEGERS_H
-*/
+int				ft_vdprintf(int fd, const char *fmt, va_list ap);
+int				ft_dprintf(int fd, const char *fmt, ...);
+int				ft_printf(const char *fmt, ...);
+
 #endif

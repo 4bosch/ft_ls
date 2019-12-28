@@ -1,16 +1,5 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   type_utils.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: abaisago <adam_bai@protonmail.com>         +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/14 13:13:14 by abaisago          #+#    #+#             */
-/*   Updated: 2019/04/10 15:30:22 by abosch           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+#include "internal/percent.h"
 
-#include "internal/shared.h"
 #include "internal/output.h"
 
 void	get_diff(t_spec *spec, int conv_len)

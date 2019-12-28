@@ -1,16 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   floats.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: abaisago <adam_bai@protonmail.com>         +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/04 11:22:36 by abaisago          #+#    #+#             */
-/*   Updated: 2019/04/23 16:19:26 by abosch           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include "ft/tmp.h"
+#include "libft.h"
 
 #include "internal/floats.h"
 #include <string.h>
@@ -40,7 +28,7 @@ char	*get_decimal(long double nbr, unsigned int precision, size_t size)
 	if (precision > size)
 		size = precision;
 	if ((res = ft_strnew(size)) == NULL)
-		ft_puterr("ERROR: get_decimal() ft_strnew", 2);
+		return (NULL);
 	i = 0;
 	while (i < size)
 	{
@@ -88,7 +76,8 @@ char	*round_float(char *str, unsigned int precision)
 		if (i < 0)
 		{
 			str[0] = '0';
-			str = ft_strjoin_free_d("1", str, 'r');
+			if ((str = ft_strjoin_free("1", str, 'r')) == NULL)
+				return (NULL);
 		}
 		else
 			str[i] += 1;
@@ -103,10 +92,15 @@ char	*ftoa(long double nbr, unsigned int precision)
 
 	whole = nbr;
 	nbr -= whole;
-	res = ft_llitoa(whole);
-	res = ft_strjoin_free_d(res, ".", 'l');
-	res = ft_strjoin_free_d(res,
-			get_decimal(nbr, precision, count_decimal(nbr)), 'l');
+	if (nbr < 0)
+		nbr = -nbr;
+	if ((res = ft_llitoa(whole)) == NULL)
+		return (NULL);
+	if ((res = ft_strjoin_free(res, ".", 'l')) == NULL)
+		return (NULL);
+	if ((res = ft_strjoin_free(res,
+				get_decimal(nbr, precision, count_decimal(nbr)), 'b')) == NULL)
+		return (NULL);
 	res = round_float(res, precision);
 	return (res);
 }

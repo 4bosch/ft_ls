@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft/tmp.h"
+#include "libft.h"
 #include <strings.h>
 
 size_t	ft_utfecut_index(char *str, size_t len)

@@ -12,7 +12,7 @@
 
 #ifndef TYPE_UTILS_H
 # define TYPE_UTILS_H
-# include "shared.h"
+# include "percent.h"
 # include <string.h>
 
 int			get_diff(t_spec *spec, int conv_len);

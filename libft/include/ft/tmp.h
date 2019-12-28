@@ -65,7 +65,8 @@ int				ft_strequ(char const *s1, char const *s2);
 int				ft_strnequ(char const *s1, char const *s2, size_t n);
 char			*ft_strsub(const char *s, unsigned int start, size_t len);
 char			*ft_strjoin(char const *s1, char const *s2);
-char			*ft_strjoin_free(char const *s1, char const *s2);
+char					*ft_strjoin_free(char const *s1, char const *s2,
+											char c);
 char			*ft_strjoin_free_d(char const *s1, char const *s2, char d);
 char			*ft_strtrim(char const *s);
 char			**ft_strsplit(char const *s, char c);
@@ -113,12 +114,20 @@ char			*ft_make_printable(char *str);
 void			ft_puterr(const char *s, int fd);
 void			ft_utfecut(char *str, size_t len);
 size_t			ft_utfecut_index(char *str, size_t len);
-size_t			ft_wchar_utfe(wchar_t c, char **res);
+char			*ft_wchar_utfe(wchar_t c);
 int8_t			ft_wchar_utfelen(wchar_t c);
 size_t			ft_count_udigits(size_t n, uint8_t base);
-size_t			ft_wstr_utfe(wchar_t *str, char **res);
+char			*ft_wstr_utfe(wchar_t *str);
 size_t			ft_wstr_utfelen(wchar_t *str);
+int8_t			ft_strmatch(char *match, char *str);
 size_t			ft_wstrlen(wchar_t *str);
 
 int				ft_printf(const char *restrict fmt, ...);
+
+typedef struct			s_string
+{
+	char				*str;
+	int					len;
+}						t_string;
+
 #endif

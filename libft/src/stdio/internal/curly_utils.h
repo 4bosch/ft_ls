@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   integers.h                                         :+:      :+:    :+:   */
+/*   curly_utils.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abaisago <adam_bai@protonmail.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/12 19:01:06 by abaisago          #+#    #+#             */
-/*   Updated: 2019/03/20 18:47:19 by abaisago         ###   ########.fr       */
+/*   Created: 2019/03/28 16:50:29 by abaisago          #+#    #+#             */
+/*   Updated: 2019/03/28 16:53:33 by abaisago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INTEGERS_H
-# define INTEGERS_H
-# define INT_MAX 2147483647
-# include "libft.h"
+#ifndef CURLY_UTILS_H
+# define CURLY_UTILS_H
+# include <string.h>
 
-int		get_number(char **str);
-char	*nbr_grouping(t_string *conv, char sep, unsigned int size);
+size_t	skip_to_colsing_curly(char **str);
 
 /*
-** INTEGERS_H
+** CURLY_UTILS_H
 */
 #endif

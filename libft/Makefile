@@ -45,16 +45,18 @@ SRC_TMP_NAME =	ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c ft_memmove.c\
 			ft_lluitosa_base.c ft_make_printable.c ft_puterr.c 				\
 			ft_strjoin_free.c ft_utfecut.c ft_utfecut_index.c 				\
 			ft_wchar_utfe.c ft_wchar_utfelen.c ft_count_udigits.c			\
-			ft_wstr_utfe.c ft_wstr_utfelen.c ft_wstrlen.c
+			ft_wstr_utfe.c ft_wstr_utfelen.c ft_wstrlen.c					\
+			ft_strmatch.c
 
 SRC_LST_NAME =  ft_lstnew.c ft_lstdelone.c ft_lstdel.c ft_lstadd.c			\
 				ft_lstiter.c ft_lstmap.c ft_lstgeti.c ft_lstswap.c			\
 				ft_lstlen.c	ft_lstquicksort.c
 
-SRC_STDIO_NAME =  args.c floats.c ft_printf.c integers.c output.c			\
-					parsing.c specifier.c type_base.c type_char.c			\
+SRC_STDIO_NAME =  args.c ctl_colors.c floats.c ft_printf.c integers.c output.c\
+					ctl_sgr.c parsing.c specifier.c type_base.c type_char.c	\
 					type_date.c type_floats.c type_int.c type_utils.c		\
-					type_utils_2.c type_wchar.c
+					type_utils_2.c type_wchar.c curly.c curly_utils.c		\
+					percent.c type_cast_utils.c type_deprecated.c
 
 OBJ_TMP_NAME := $(SRC_TMP_NAME:.c=.o)
 
@@ -65,7 +67,7 @@ OBJ_STDIO_NAME := $(SRC_STDIO_NAME:.c=.o)
 
 
 #~~~~~~~~~FLAGS~~~~~~~~#
-LIB_FLAG := -I$(INC_PATH) 
+LIB_FLAG := -I$(INC_PATH)
 
 OPTI_FLAG = -O3
 
@@ -78,7 +80,7 @@ CC = clang
 
 SRC :=	$(addprefix $(SRC_STDIO_PATH)/,$(SRC_STDIO_NAME))	\
 		$(addprefix $(SRC_TMP_PATH)/,$(SRC_TMP_NAME))		\
-		$(addprefix $(SRC_LST_PATH)/,$(SRC_LST_NAME))	
+		$(addprefix $(SRC_LST_PATH)/,$(SRC_LST_NAME))
 
 OBJ_TMP := $(addprefix $(OBJ_PATH)/,$(OBJ_TMP_NAME))
 OBJ_LST := $(addprefix $(OBJ_PATH)/,$(OBJ_LST_NAME))
@@ -97,10 +99,10 @@ $(OBJ_PATH)/%.o: $(SRC_TMP_PATH)/%.c
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
 	$(CC) $(CFLAGS) $(LIB_FLAG) $(OPTI_FLAG) -o $@ -c $<
 
-$(OBJ_PATH)/%.o: $(SRC_LST_PATH)/%.c 
+$(OBJ_PATH)/%.o: $(SRC_LST_PATH)/%.c
 	$(CC) $(CFLAGS) $(LIB_FLAG) $(OPTI_FLAG) -o $@ -c $<
 
-$(OBJ_PATH)/%.o: $(SRC_STDIO_PATH)/%.c 
+$(OBJ_PATH)/%.o: $(SRC_STDIO_PATH)/%.c
 	$(CC) $(CFLAGS) $(LIB_FLAG) $(OPTI_FLAG) -o $@ -c $<
 
 clean:

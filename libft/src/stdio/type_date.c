@@ -1,20 +1,8 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   type_date.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: abaisago <adam_bai@protonmail.com>         +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/19 18:29:02 by abaisago          #+#    #+#             */
-/*   Updated: 2019/04/10 15:28:59 by abosch           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "internal/date.h"
-#include "ft/tmp.h"
-#include "internal/shared.h"
+#include "libft.h"
 
 #include "internal/output.h"
+#include "internal/percent.h"
 
 #include <stdlib.h>
 
@@ -52,6 +40,6 @@ void			type_k(va_list ap, t_spec *spec, t_buf *buf)
 	conv.str = get_date(date, iso);
 	conv.len = 10;
 	spec->flags = 0;
-	write_spec(buf, spec, &conv);
+	write_percent(spec, &conv, buf);
 	free(iso);
 }

@@ -8,6 +8,15 @@ typedef struct s_file
 {
 	char		*name;
 	struct stat	sbuf;
+	int			path_len;
+	int			name_len;
 }				t_file;
+
+typedef struct s_dir
+{
+	char		*name;
+	int			path_len;
+	int			name_len;
+}				t_dir;
 
 #endif

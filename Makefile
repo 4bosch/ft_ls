@@ -27,7 +27,7 @@ OPTIFLAGS = -O3
 #					SOURCES					  #
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 SRC_PATH = src
-SRC_NAME = print.c utils.c ft_ls.c
+SRC_NAME = print.c utils.c print2.c option.c cmp.c ft_ls.c main.c
 
 SRC :=	$(addprefix $(SRC_PATH)/,$(SRC_NAME))
 
@@ -90,12 +90,12 @@ lclean:
 lfclean:
 	@make -C $(LIB_PD) fclean
 
-clean:
+clean: lclean
 	@rm -f $(OBJ)
 	@rmdir $(OBJ_PATH) 2> /dev/null || true
 
-fclean: clean
-	@rm -f $(CHECKER) $(PUSH)
+fclean: clean lfclean
+	@rm -f $(NAME)
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 #					OTHER					 #

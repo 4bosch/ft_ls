@@ -1,50 +1,43 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_ls.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: abosch <marvin@42.fr>                      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/02 16:20:18 by abosch            #+#    #+#             */
-/*   Updated: 2019/10/02 16:54:19 by abosch           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "ft_ls.h"
 
-// CAS D'ERREUR : opendir, closedir, readdir
-// MALLOC A GERER : lstnew, create_file
-void	list_files(char *path)
+static t_list   **sort(t_list **files, int16_t opt)
 {
-	DIR				*dirp;
-	struct dirent	*ret;
-	t_list			*files;
-	t_list			**tab_files;
-
-	if(!(dirp = opendir(path)))
-		return ;		//Cas erreur a implementer
-	files = ft_lstnew(create_file(readdir(dirp)->d_name), sizeof(t_file));
-	while ((ret = readdir(dirp)))
-		ft_lstadd(&files, ft_lstnew(create_file(ret->d_name), sizeof(t_file)));
-	//parse option pour selectionner la fonction de comparaison qui convient
-	tab_files = ft_lstquicksort(&files, &name_cmp);
-	if (1) //si pas long format
-		print_files(tab_files, 1);
-	else	// si long format 
-		print_files(tab_files, 0);
-	if(closedir(dirp) == -1)
-		return ;		//cas erreur a implementer
+    if (opt & O_REVERSE)
+    {
+        if (opt & O_TIME)
+            return (ft_lstquicksorttab(files, &rtime_cmp));
+        else
+            return (ft_lstquicksorttab(files, &rname_cmp));
+    }
+    else
+    {
+        if (opt & O_TIME)
+            return (ft_lstquicksorttab(files, &time_cmp));
+        else
+            return (ft_lstquicksorttab(files, &name_cmp));
+    }
 }
 
-int		main(int ac, char **av)
+void     list_files(char *path, int16_t opt)
 {
-	if (ac == 1)  //ls sans args
+    DIR             *dirp;
+    struct dirent   *ret;
+    t_list          *files;
+    t_list          **tab_files;
+
+    files = NULL;
+    if(!(dirp = opendir(path)))
+		ft_puterr(strerror(errno), 2);
+    create_file(path, readdir(dirp)->d_name, &files, opt);
+    while ((ret = readdir(dirp)))
 	{
-		list_files("./");
+        create_file(path, ret->d_name, &files, opt);
 	}
-	else	//ls avec args
-		return (1);
-	if (av[0][0] == 0)
-		return (0);
-	return (0);
+    tab_files = sort(&files, opt);
+    if (opt & O_LFORMAT)
+        print_files(tab_files, 0);
+    else    // si long format
+        print_files(tab_files, 1);
+    if(closedir(dirp) == -1)
+        return ;        //cas erreur a implementer
 }

@@ -1,10 +1,14 @@
 #ifndef UTILS_H
 # define UTILS_H
+
+# include <stdint.h>
+# include <stdio.h>
+# include <sys/errno.h>
 # include "shared.h"
 # include "libft.h"
+# include "option.h"
 
-t_file		*create_file(char *name);
-int			name_cmp(t_list e1, t_list e2);
-int			time_cmp(t_list e1, t_list e2);
+void	create_file(char *path, char *name, t_list **list, int16_t option);
+void	create_dir(char *name,int path_len, int name_len, t_list **list);
 
 #endif

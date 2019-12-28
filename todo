@@ -1,5 +1,0 @@
-fonction dates :
-	une fonction qui creer une string representant la date:
-		 annee mois jour heure:minute seconde
-	une fonction qui converti cette string en string pour -l :
-		jour mois (heure:minute)ouAnnee

@@ -5,6 +5,10 @@
 # include "libft.h"
 # include "utils.h"
 # include "print.h"
+# include "option.h"
+# include "cmp.h"
 # include <dirent.h>
+
+void     list_files(char *path, int16_t opt);
 
 #endif

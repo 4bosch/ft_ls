@@ -46,7 +46,7 @@ SRC_TMP_NAME =	ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c ft_memmove.c\
 			ft_strjoin_free.c ft_utfecut.c ft_utfecut_index.c 				\
 			ft_wchar_utfe.c ft_wchar_utfelen.c ft_count_udigits.c			\
 			ft_wstr_utfe.c ft_wstr_utfelen.c ft_wstrlen.c					\
-			ft_strmatch.c
+			ft_strmatch.c ft_printerr.c
 
 SRC_LST_NAME =  ft_lstnew.c ft_lstdelone.c ft_lstdel.c ft_lstadd.c			\
 				ft_lstiter.c ft_lstmap.c ft_lstgeti.c ft_lstswap.c			\

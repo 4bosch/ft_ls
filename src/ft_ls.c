@@ -27,7 +27,10 @@ void     list_files(char *path, int16_t opt)
 
     files = NULL;
     if(!(dirp = opendir(path)))
-		ft_puterr(strerror(errno), 2);
+	{
+		ft_printerr("ft_ls: %.*s: %s\n", ft_strlen(path) - 1, path, strerror(errno));
+		exit(1);
+	}
     create_file(path, readdir(dirp)->d_name, &files, opt);
     while ((ret = readdir(dirp)))
 	{

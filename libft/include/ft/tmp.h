@@ -123,6 +123,7 @@ int8_t			ft_strmatch(char *match, char *str);
 size_t			ft_wstrlen(wchar_t *str);
 
 int				ft_printf(const char *restrict fmt, ...);
+void			ft_printerr(const char *fmt, ...);
 
 typedef struct			s_string
 {

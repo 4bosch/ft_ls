@@ -15,5 +15,7 @@
 # include <stdarg.h>
 
 int				ft_printf(const char *restrict fmt, ...);
+int				ft_dprintf(int fd, const char *restrict fmt, ...);
+int				ft_vdprintf(int fd, const char *restrict fmt, va_list ap);
 
 #endif

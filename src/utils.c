@@ -91,8 +91,11 @@ void		create_dir(char *name, int path_len, int name_len, t_list **list)
 	else
 	{
 		dir->name = ft_strnew(dir->path_len + dir->name_len + 1);
-		ft_strcpy(dir->name, name);
+		ft_strncpy(dir->name, name, dir->path_len + dir->name_len);
 		ft_strcat(dir->name, "/");
 	}
-	ft_lstadd(list, ft_lstnew(dir, sizeof(dir)));
+	if (*list == NULL)
+		*list = ft_lstnew(dir, sizeof(t_dir));
+	else
+		ft_lstadd(list, ft_lstnew(dir, sizeof(t_dir)));
 }

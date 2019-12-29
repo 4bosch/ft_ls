@@ -22,7 +22,7 @@ int			main(int ac, char **av)
 	int		len;
 
 	options = 0;
-	dir = get_options(ac, av, &options);
+	get_options(ac, av, &options, &dir);
 	len = ft_lstlen(dir);
 	if (len == 1)
 	{
@@ -33,7 +33,10 @@ int			main(int ac, char **av)
 		ft_lstquicksort(&dir, &dname_cmp);
 		while (dir != NULL)
 		{
-			ft_printf("%s:\n", ((t_dir*)dir->content)->name);
+			ft_printf("dir = %s, path_len = %d and name_len = %d\n\n", ((t_dir*)dir->content)->name,
+				((t_dir*)dir->content)->path_len, ((t_dir*)dir->content)->name_len);
+			ft_printf("%.*s:\n", ((t_dir*)dir->content)->name_len,
+				((t_dir*)dir->content)->name + ((t_dir*)dir->content)->path_len);
 			list_files(((t_dir*)dir->content)->name, options);
 			if (dir->next != NULL)
 				ft_printf("\n");

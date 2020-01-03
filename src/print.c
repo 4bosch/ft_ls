@@ -66,8 +66,10 @@ void		print_files(t_list **tab, char bool)
 
 	i = -1;
 	if (bool)
+	{
 		while (tab[++i] != NULL)
 			ft_printf("%s\n", ((t_file*)tab[i]->content)->name + ((t_file*)tab[i]->content)->path_len);
+	}
 	else
 	{
 		init_max(&max);

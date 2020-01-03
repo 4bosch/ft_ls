@@ -14,7 +14,33 @@
 
 // CAS D'ERREUR : opendir, closedir, readdir
 // MALLOC A GERER : lstnew, create_file
+/*
+static int	is_dir(char *path)
+{
+	struct stat sbuf;
 
+	lstat(path, &sbuf);
+	if ((sbuf.st_mode & S_IFMT) == S_IFDIR)
+		return (1);
+	else
+		return (0);
+}
+
+static void	printone(char *name, int16_t opt)
+{
+	t_list	*file;
+	t_list	*tab[2];
+
+	file = NULL;
+	create_file(NULL, name, &file, opt);
+	tab[0] = file;
+	tab[1] = NULL;
+	if (opt & O_LFORMAT)
+		print_files(tab, 0);
+	else
+		print_files(tab, 1);
+}
+*/
 int			main(int ac, char **av)
 {
 	int16_t	options;
@@ -33,15 +59,16 @@ int			main(int ac, char **av)
 		ft_lstquicksort(&dir, &dname_cmp);
 		while (dir != NULL)
 		{
-			ft_printf("dir = %s, path_len = %d and name_len = %d\n\n", ((t_dir*)dir->content)->name,
-				((t_dir*)dir->content)->path_len, ((t_dir*)dir->content)->name_len);
 			ft_printf("%.*s:\n", ((t_dir*)dir->content)->name_len,
 				((t_dir*)dir->content)->name + ((t_dir*)dir->content)->path_len);
-			list_files(((t_dir*)dir->content)->name, options);
+		/*	if (!is_dir(((t_dir*)dir->content)->name))
+				printone(((t_dir*)dir->content)->name, options);
+			else
+		*/		list_files(((t_dir*)dir->content)->name, options);
 			if (dir->next != NULL)
 				ft_printf("\n");
 			dir = dir->next;
 		}
 	}
-	return (1);
+	return (0);
 }

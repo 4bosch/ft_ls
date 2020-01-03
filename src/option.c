@@ -70,24 +70,24 @@ void			get_options(int ac, char **av, int16_t *opt, t_list **dir)
 	int		len;
 
 	i = 0;
-	while (++i < ac && av[i][0] == '-')
+	while (++i < ac && av[i][0] == '-' && (av[i][1] != '-' || (av[i][1] == '-' && av[i][2] != '\0')))
 	{
 		j = 0;
 		while (av[i][++j] != '\0')
 			active_options(av[i][j], opt);
 	}
-	*dir = NULL;
 	if (i == ac)
 	{
 		create_dir("./", 0, 2, dir);
 		return ;
 	}
+	else if (av[i][1] == '-')
+		i++;
+	*dir = NULL;
 	while (i < ac)
 	{
 		len = 0;
 		namelen(av[i], &len, &j);
-		ft_printf("±±±±±±±±±± ARGS FOR CREATE DIR ±±±±±±±±±±±±\n");
-		printf("name : %s, path_len : %d, name_len : %d, dir : %p\n±±±±±±±±±±±±±±±±±±\n\n",av[i],len,j, dir);
 		create_dir(av[i], len, j, dir);
 		i++;
 	}

@@ -93,17 +93,20 @@ all: $(NAME)
 $(NAME): $(OBJ_TMP) $(OBJ_LST) $(OBJ_STDIO)
 	@ar rc $@ $^
 	@ranlib $@
-	@echo "DONE LIBFT.A CREATED"
+	@echo "Compilation of libft.a is done"
 
 $(OBJ_PATH)/%.o: $(SRC_TMP_PATH)/%.c
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
-	$(CC) $(CFLAGS) $(LIB_FLAG) $(OPTI_FLAG) -o $@ -c $<
+	@$(CC) $(CFLAGS) $(LIB_FLAG) $(OPTI_FLAG) -o $@ -c $<
+	@echo "Compiling libft.a: $<"
 
 $(OBJ_PATH)/%.o: $(SRC_LST_PATH)/%.c 
-	$(CC) $(CFLAGS) $(LIB_FLAG) -I../include $(OPTI_FLAG) -o $@ -c $<
+	@$(CC) $(CFLAGS) $(LIB_FLAG) -I../include $(OPTI_FLAG) -o $@ -c $<
+	@echo "Compiling libft.a: $<"
 
 $(OBJ_PATH)/%.o: $(SRC_STDIO_PATH)/%.c
-	$(CC) $(CFLAGS) $(LIB_FLAG) $(OPTI_FLAG) -o $@ -c $<
+	@$(CC) $(CFLAGS) $(LIB_FLAG) $(OPTI_FLAG) -o $@ -c $<
+	@echo "Compiling libft.a: $<"
 
 clean:
 	@rm -f $(OBJ_TMP) $(OBJ_LST) $(OBJ_STDIO)

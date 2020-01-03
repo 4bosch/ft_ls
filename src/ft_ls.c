@@ -33,9 +33,9 @@ void     list_files(char *path, int16_t opt)
 	}
     create_file(path, readdir(dirp)->d_name, &files, opt);
     while ((ret = readdir(dirp)))
-	{
         create_file(path, ret->d_name, &files, opt);
-	}
+	if (files == NULL)
+		return ;
     tab_files = sort(&files, opt);
     if (opt & O_LFORMAT)
         print_files(tab_files, 0);

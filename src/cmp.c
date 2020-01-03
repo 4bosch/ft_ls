@@ -38,5 +38,5 @@ int			rtime_cmp(t_list e1, t_list e2)
 
 int			dname_cmp(t_list e1, t_list e2)
 {
-	return ((ft_strcmp((char*)e1.content, (char*)e2.content) < 0) ? 1 : 0);
+	return ((ft_strcmp((char*)e1.content, (char*)e2.content) < 0) ? 0 : 1);
 }

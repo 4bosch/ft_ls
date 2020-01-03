@@ -71,7 +71,8 @@ $(NAME): $(OBJ) $(OBJ_CHECKER) $(LIB)
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
-	$(CC) $(CFLAGS) $(CPPFLAGS) $(OPTIFLAGS) -o $@ -c $<
+	@$(CC) $(CFLAGS) $(CPPFLAGS) $(OPTIFLAGS) -o $@ -c $<
+	@echo "Compiling $(NAME): $<"
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 #					LIB						  #

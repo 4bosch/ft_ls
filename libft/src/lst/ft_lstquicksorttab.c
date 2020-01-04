@@ -41,23 +41,21 @@ static void		swap(t_list *e1, t_list *e2)
 	*e2 = tmp;
 }
 
-static int		partition(t_list **tab, int low, int high, int (*cmp)(t_list e1, t_list e2))
+static int		partition(t_list **tab, int low, int high, int (*cmp)(t_list *e1, t_list *e2))
 {
-	t_list	*pivot;
-	int		smaller;
+	int		i;
 	int		j;
-   
-	pivot = tab[high];
-	smaller = low - 1;
-	j = low - 1;
+
+	i = low;
+	j = low;
 	while (++j <= high)
-		if (cmp(*tab[j], *pivot))
-			swap(tab[++smaller], tab[j]);
-	swap(tab[smaller + 1], tab[high]);
-	return (smaller + 1);
+		if (cmp(tab[j], tab[low]))
+			swap(tab[++i], tab[j]);
+	swap(tab[i], tab[low]);
+	return (i);	
 }
 
-static void		quicksort(t_list **tab, int low, int high, int (*cmp)(t_list e1, t_list e2))
+static void		quicksort(t_list **tab, int low, int high, int (*cmp)(t_list *e1, t_list *e2))
 {
 	int	pivot;
 
@@ -70,16 +68,16 @@ static void		quicksort(t_list **tab, int low, int high, int (*cmp)(t_list e1, t_
 }
 
 
-t_list			**ft_lstquicksorttab(t_list **lst, int (*cmp)(t_list e1, t_list e2))
+t_list			**ft_lstquicksorttab(t_list *lst, int (*cmp)(t_list *e1, t_list *e2))
 {
 	t_list	**tab;
 	int		len;
 
 	if (lst != NULL && cmp != NULL)
 	{
-		if ((len = ft_lstlen(*lst)) <= 0)
+		if ((len = ft_lstlen(lst)) <= 0)
 			return (NULL); //cas d'erreur a gerer
-		tab = lst2tab(*lst);
+		tab = lst2tab(lst);
 		quicksort(tab, 0, len - 1, cmp);
 		tab[len] = NULL;
 		return (tab);

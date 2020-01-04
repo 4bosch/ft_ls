@@ -1,6 +1,6 @@
 #include "ft_ls.h"
 
-static t_list   **sort(t_list **files, int16_t opt)
+static t_list   **sort(t_list *files, int16_t opt)
 {
     if (opt & O_REVERSE)
     {
@@ -36,7 +36,7 @@ void     list_files(char *path, int16_t opt)
         create_file(path, ret->d_name, &files, opt);
 	if (files == NULL)
 		return ;
-    tab_files = sort(&files, opt);
+    tab_files = sort(files, opt);
     if (opt & O_LFORMAT)
         print_files(tab_files, 0);
     else    // si long format

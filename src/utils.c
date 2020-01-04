@@ -33,7 +33,10 @@ static void	status(char *path, char *name, t_file *file)
 		off = 2;
 	ft_strcat(tmp, name);
 	if((lstat(tmp, &file->sbuf)) == -1)
+	{
 		perror(strerror(errno));
+		ft_printf("test\n");
+	}
 	file->name = ft_strnew(file->path_len + file->name_len - off);
 	ft_strcpy(file->name, tmp + off);
 	file->path_len -= off;
@@ -56,11 +59,7 @@ void		create_file(char *path, char *name, t_list **list, int16_t opt)
 	{
 		r = readlink(file->name, linkbuf, 1024);
 		if (r < 0)
-		{
-			ft_puterr("ft_ls: readlink: ", 2);
-			ft_puterr(strerror(errno), 2);
-			ft_putchar('\n');
-		}
+			ft_printerr("ft_ls: readlink: %s\n", strerror(errno));
 		linkbuf[r] = '\0';
 		tmp = ft_strnew(ft_strlen(file->name) + r + 5);
 		ft_strcpy(tmp, file->name);

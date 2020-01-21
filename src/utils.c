@@ -32,11 +32,9 @@ static void	status(char *path, char *name, t_file *file)
 	else
 		off = 2;
 	ft_strcat(tmp, name);
+//	ft_printf("tmp = |%s|\n", tmp);
 	if((lstat(tmp, &file->sbuf)) == -1)
-	{
 		perror(strerror(errno));
-		ft_printf("test\n");
-	}
 	file->name = ft_strnew(file->path_len + file->name_len - off);
 	ft_strcpy(file->name, tmp + off);
 	file->path_len -= off;

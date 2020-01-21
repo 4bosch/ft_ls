@@ -14,7 +14,7 @@
 
 // CAS D'ERREUR : opendir, closedir, readdir
 // MALLOC A GERER : lstnew, create_file
-
+/*
 static int	is_dir(char *path)
 {
 	struct stat sbuf;
@@ -39,7 +39,7 @@ static void	printone(char *name, int16_t opt)
 		print_files(tab, 0);
 	else
 		print_files(tab, 1);
-}
+}*/
 
 int			main(int ac, char **av)
 {
@@ -54,8 +54,8 @@ int			main(int ac, char **av)
 	{
 	/*	if (!is_dir(((t_dir*)dir->content)->name))
 			printone(((t_dir*)dir->content)->name, options);
-	*/	else
-			list_files(((t_dir*)dir->content)->name, options);
+		else
+	*/		list_files(((t_dir*)dir->content)->name, options);
 	}
 	else
 	{

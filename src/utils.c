@@ -14,6 +14,17 @@
 #include "shared.h"
 #include <errno.h>
 
+int		is_dir(char *path)
+{
+	struct stat sbuf;
+
+	lstat(path, &sbuf);
+	if ((sbuf.st_mode & S_IFMT) == S_IFDIR)
+		return (1);
+	else
+		return (0);
+}
+
 static void	status(char *path, char *name, t_file *file)
 {
 	char	*tmp;

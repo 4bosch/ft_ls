@@ -1,0 +1,23 @@
+[+] 00
+[ ] 01 R
+[+] 02
+[+] 03
+[+] 04
+[+] 05
+[ ] 06 rR
+[ ] 07 t
+[+] 08
+[ ] 09 aR
+[ ] 10 aRl
+[ ] 11 single file
+[+] 12
+[ ] 13 hyphen hard
+[ ] 14 hyphen harder
+[ ] 20 error handling
+[ ] 21 symlink
+[ ] 22 no username
+[+] 23
+[ ] 24 multiple files
+[ ] 25 perm special bits
+[ ] 26 per special bits dir
+[ ] 30 opt mix

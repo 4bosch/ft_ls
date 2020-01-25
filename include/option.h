@@ -1,7 +1,9 @@
 #ifndef OPTION_H
 # define OPTION_H
 # include <stdint.h>
+
 # include "libft.h"
+# include "dir.h"
 
 # define O_LFORMAT 1
 # define O_RECURSIVE 2

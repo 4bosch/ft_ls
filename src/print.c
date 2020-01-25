@@ -59,13 +59,13 @@ static void	fill_max(t_list **tab, t_max *max)
 		max->sum += ((t_file *)tab[i]->content)->sbuf.st_blocks;
 }
 
-void		print_files(t_list **tab, char bool)
+void		print_files(t_list **tab, char lf, char dir)
 {
 	int	i;
 	t_max	max;
 
 	i = -1;
-	if (bool)
+	if (lf)
 	{
 		while (tab[++i] != NULL)
 			ft_printf("%s\n", ((t_file*)tab[i]->content)->name + ((t_file*)tab[i]->content)->path_len);
@@ -74,7 +74,8 @@ void		print_files(t_list **tab, char bool)
 	{
 		init_max(&max);
 		fill_max(tab, &max);
-		ft_printf("total %llu\n", max.sum);
+		if (dir)
+			ft_printf("total %llu\n", max.sum);
 		while (tab[++i] != NULL)
 			long_print((t_file*)tab[i]->content, max);
 	}

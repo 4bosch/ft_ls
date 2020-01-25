@@ -1,11 +1,13 @@
 #ifndef PRINT_H
 # define PRINT_H
-# include "shared.h"
-# include "libft.h"
+
 # include <grp.h>
 # include <uuid/uuid.h>
 # include <sys/types.h>
 # include <pwd.h>
+
+# include "shared.h"
+# include "libft.h"
 
 typedef struct		s_max
 {
@@ -16,7 +18,7 @@ typedef struct		s_max
 	size_t		sum;
 }			t_max;
 
-void	print_files(t_list **tab, char c);
+void	print_files(t_list **tab, char lf, char dir);
 void	long_print(t_file *file, t_max max);
 
 #endif

@@ -22,13 +22,14 @@ static void	printone(char *name, int16_t opt)
 	t_list	*tab[2];
 
 	file = NULL;
-	create_file("", name, &file, opt);
+	name[ft_strlen(name) - 1] = '\0';
+	create_file("./", name, &file, opt);
 	tab[0] = file;
 	tab[1] = NULL;
 	if (opt & O_LFORMAT)
-		print_files(tab, 0);
+		print_files(tab, 0, 0);
 	else
-		print_files(tab, 1);
+		print_files(tab, 1, 0);
 }
 
 int			main(int ac, char **av)

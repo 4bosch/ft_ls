@@ -1,5 +1,4 @@
 #include "option.h"
-#include "utils.h"
 
 #include <stdio.h> ///////////////////DELETE
 
@@ -83,7 +82,6 @@ void			get_options(int ac, char **av, int16_t *opt, t_list **dir)
 	}
 	else if (av[i][1] == '-')
 		i++;
-	*dir = NULL;
 	while (i < ac)
 	{
 		len = 0;

@@ -38,9 +38,9 @@ void     list_files(char *path, int16_t opt)
 		return ;
     tab_files = sort(files, opt);
     if (opt & O_LFORMAT)
-        print_files(tab_files, 0);
+        print_files(tab_files, 0, 1);
     else    // si long format
-        print_files(tab_files, 1);
+        print_files(tab_files, 1, 1);
     if(closedir(dirp) == -1)
         return ;        //cas erreur a implementer
 }

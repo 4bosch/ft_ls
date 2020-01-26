@@ -22,7 +22,6 @@ static void	printone(char *name, int16_t opt)
 	t_list	*tab[2];
 
 	file = NULL;
-	name[ft_strlen(name) - 1] = '\0';
 	create_file("./", name, &file, opt);
 	tab[0] = file;
 	tab[1] = NULL;
@@ -44,22 +43,23 @@ int			main(int ac, char **av)
 	len = ft_lstlen(dir);
 	if (len == 1)
 	{
-		if (is_dir(((t_dir*)dir->content)->name))
-			list_files(((t_dir*)dir->content)->name, options);
+		if (is_dir(D(dir)->name))
+			list_files(D(dir)->name, D(dir)->name_len + D(dir)->path_len, options);
 		else
-			printone(((t_dir*)dir->content)->name, options);
+			printone(D(dir)->name, options);
 	}
 	else
 	{
 		ft_lstquicksort(&dir, &dname_cmp);
 		while (dir != NULL)
 		{
-			ft_printf("%.*s:\n", ((t_dir*)dir->content)->name_len,
-				((t_dir*)dir->content)->name + ((t_dir*)dir->content)->path_len);
-			if (is_dir(((t_dir*)dir->content)->name))
-				list_files(((t_dir*)dir->content)->name, options);
+			if (is_dir(D(dir)->name))
+			{
+				ft_printf("%.*s:\n", D(dir)->name_len, D(dir)->name + D(dir)->path_len);
+				list_files(D(dir)->name, D(dir)->name_len + D(dir)->path_len, options);
+			}
 			else
-				printone(((t_dir*)dir->content)->name, options);
+				printone(D(dir)->name, options);
 			if (dir->next != NULL)
 				ft_printf("\n");
 			dir = dir->next;

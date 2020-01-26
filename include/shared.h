@@ -1,8 +1,12 @@
 #ifndef SHARED_H
 # define SHARED_H
+
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <unistd.h>
+
+# define F(f) ((t_file*)f->content)
+# define D(d) ((t_dir*)d->content)
 
 typedef struct s_file
 {

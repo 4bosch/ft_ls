@@ -10,6 +10,6 @@
 # include "option.h"
 # include "cmp.h"
 
-void     list_files(char *path, int16_t opt);
+void     list_files(char *path, int path_len, int16_t opt);
 
 #endif

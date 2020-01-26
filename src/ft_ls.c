@@ -2,45 +2,47 @@
 
 static t_list   **sort(t_list *files, int16_t opt)
 {
-    if (opt & O_REVERSE)
-    {
-        if (opt & O_TIME)
-            return (ft_lstquicksorttab(files, &rtime_cmp));
-        else
-            return (ft_lstquicksorttab(files, &rname_cmp));
-    }
-    else
-    {
-        if (opt & O_TIME)
-            return (ft_lstquicksorttab(files, &time_cmp));
-        else
-            return (ft_lstquicksorttab(files, &name_cmp));
-    }
+	if (opt & O_REVERSE)
+	{
+		if (opt & O_TIME)
+			return (ft_lstquicksorttab(files, &rtime_cmp));
+		else
+			return (ft_lstquicksorttab(files, &rname_cmp));
+	}
+	else
+	{
+		if (opt & O_TIME)
+			return (ft_lstquicksorttab(files, &time_cmp));
+		else
+			return (ft_lstquicksorttab(files, &name_cmp));
+	}
 }
 
-void     list_files(char *path, int16_t opt)
+void     list_files(char *path, int pathlen, int16_t opt)
 {
-    DIR             *dirp;
-    struct dirent   *ret;
-    t_list          *files;
-    t_list          **tab_files;
+	DIR             *dirp;
+	struct dirent   *ret;
+	t_list          *files;
+	t_list          **tab_files;
 
-    files = NULL;
-    if(!(dirp = opendir(path)))
+	files = NULL;
+	if (path[pathlen] != '/')
+		path[pathlen] = '/';
+	if(!(dirp = opendir(path)))
 	{
 		ft_printerr("ft_ls: %.*s: %s\n", ft_strlen(path) - 1, path, strerror(errno));
 		exit(1);
 	}
-    create_file(path, readdir(dirp)->d_name, &files, opt);
-    while ((ret = readdir(dirp)))
-        create_file(path, ret->d_name, &files, opt);
+	create_file(path, readdir(dirp)->d_name, &files, opt);
+	while ((ret = readdir(dirp)))
+		create_file(path, ret->d_name, &files, opt);
 	if (files == NULL)
 		return ;
-    tab_files = sort(files, opt);
-    if (opt & O_LFORMAT)
-        print_files(tab_files, 0, 1);
-    else    // si long format
-        print_files(tab_files, 1, 1);
-    if(closedir(dirp) == -1)
-        return ;        //cas erreur a implementer
+	tab_files = sort(files, opt);
+	if (opt & O_LFORMAT)
+		print_files(tab_files, 0, 1);
+	else    // si long format
+		print_files(tab_files, 1, 1);
+	if(closedir(dirp) == -1)
+		return ;        //cas erreur a implementer
 }

@@ -15,6 +15,8 @@
 // CAS D'ERREUR : opendir, closedir, readdir
 // MALLOC A GERER : lstnew, create_file
 
+int	g_status = 0;
+
 
 static void	printone(char *name, int16_t opt)
 {
@@ -60,10 +62,10 @@ int			main(int ac, char **av)
 			}
 			else
 				printone(D(dir)->name, options);
-			if (dir->next != NULL)
+			if (dir->next != NULL && is_dir(((t_dir*)dir->next->content)->name))
 				ft_printf("\n");
 			dir = dir->next;
 		}
 	}
-	return (0);
+	return (g_status);
 }

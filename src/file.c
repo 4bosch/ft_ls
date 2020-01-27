@@ -7,8 +7,21 @@ static void	fill_file(char *path, char *name, t_file *file)
 	file->name = ft_strnew(file->name_len + file->path_len + 1);
 	ft_strcpy(file->name, path);
 	ft_strcat(file->name, name);
+}
+
+static int	file_status(t_file *file)
+{
+	extern int	g_status;
+
 	if((lstat(file->name, &file->sbuf)) == -1)
-		perror(strerror(errno));
+	{
+		ft_printerr("ft_ls: %s: %s\n", file->name + file->path_len, strerror(errno));
+		free(file->name);
+		free(file);
+		g_status = 1;
+		return (1);
+	}
+	return (0);
 }
 
 static void	linkinfo(t_file *file)
@@ -38,6 +51,8 @@ void		create_file(char *path, char *name, t_list **list, int16_t opt)
 	if (!(file = (t_file*)malloc(sizeof(t_file))))
 		ft_puterr("Malloc failed\n", 2);
 	fill_file(path, name, file);
+	if (file_status(file))
+		return ;
 	if ((opt & O_LFORMAT) && ((file->sbuf.st_mode & S_IFMT) == S_IFLNK))
 		linkinfo(file);
 	if (*list == NULL)

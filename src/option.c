@@ -23,50 +23,10 @@ static void	active_options(char op, int16_t *opt)
 	}
 }
 
-static void	namelen(char *s, int *path, int *name)
-{
-	int	i;
-	int	slash;
-	int	word;
-
-	i = -1;
-	slash = 0;
-	word = 1;
-	while (s[++i] != '\0')
-	{
-		if (s[i] == '/')
-			slash++;	
-		if (s[i] == '/' && s[i + 1] != '\0' && s[i + 1] != '/')
-			word++;
-	}
-	if (word == 1 && slash == 0)
-		*name = i;
-	else if (word == 1 && slash == 1)
-		*name = i - 1;
-	else
-	{
-		i = -1;
-		while (s[++i] != '\0' && word != 1)
-		{
-			if (s[i] == '/')
-			{
-				slash--;
-				word--;
-			}
-		}
-		*path = i;
-		if (word == 1 && slash == 0)
-			*name = ft_strlen(s + i);
-		else
-			*name = ft_strlen(s + i) - slash;
-	}
-}
-
 void			get_options(int ac, char **av, int16_t *opt, t_list **dir)
 {
 	int		i;
 	int		j;
-	int		len;
 
 	i = 0;
 	while (++i < ac && av[i][0] == '-' && (av[i][1] != '-' || (av[i][1] == '-' && av[i][2] != '\0')))
@@ -84,9 +44,7 @@ void			get_options(int ac, char **av, int16_t *opt, t_list **dir)
 		i++;
 	while (i < ac)
 	{
-		len = 0;
-		namelen(av[i], &len, &j);
-		create_dir(av[i], len, j, dir);
+		create_dir(av[i], 0, ft_strlen(av[i]), dir);
 		i++;
 	}
 }

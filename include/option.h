@@ -11,6 +11,7 @@
 # define O_REVERSE 16
 # define O_ALL 32
 # define O_ONE 64
+# define O_ONEFILE 128
 
 void	get_options(int ac, char **av, int16_t *opt, t_list **dir);
 

@@ -29,8 +29,13 @@ void			get_options(int ac, char **av, int16_t *opt, t_list **dir)
 	int		j;
 
 	i = 0;
-	while (++i < ac && av[i][0] == '-' && (av[i][1] != '-' || (av[i][1] == '-' && av[i][2] != '\0')))
+	while (++i < ac && (av[i][0] == '-' && av[i][1] != '\0'))
 	{
+		if (ft_strcmp(av[i], "--") == 0)
+		{
+			i++;
+			break ;
+		}
 		j = 0;
 		while (av[i][++j] != '\0')
 			active_options(av[i][j], opt);
@@ -40,8 +45,6 @@ void			get_options(int ac, char **av, int16_t *opt, t_list **dir)
 		create_dir("./", 0, 2, dir);
 		return ;
 	}
-	else if (av[i][1] == '-')
-		i++;
 	while (i < ac)
 	{
 		create_dir(av[i], 0, ft_strlen(av[i]), dir);

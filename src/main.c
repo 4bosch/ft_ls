@@ -24,7 +24,9 @@ static void	printone(char *name, int16_t opt)
 	t_list	*tab[2];
 
 	file = NULL;
+	opt |= O_ONEFILE;
 	create_file("./", name, &file, opt);
+	opt &= ~O_ONEFILE;
 	tab[0] = file;
 	tab[1] = NULL;
 	if (opt & O_LFORMAT)

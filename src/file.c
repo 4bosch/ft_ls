@@ -46,7 +46,7 @@ void		create_file(char *path, char *name, t_list **list, int16_t opt)
 {
 	t_file	*file;
 
-	if (!(opt & O_ALL) && *name == '.')
+	if (!(opt & O_ALL) && !(opt & O_ONEFILE) && *name == '.')
 		return ;
 	if (!(file = (t_file*)malloc(sizeof(t_file))))
 		ft_puterr("Malloc failed\n", 2);

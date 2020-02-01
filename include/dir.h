@@ -5,6 +5,6 @@
 # include "libft.h"
 
 void	create_dir(char *name,int path_len, int name_len, t_list **list);
-int	is_dir(char *path);
+void	move_dir(t_list **input, t_list **dir);
 
 #endif

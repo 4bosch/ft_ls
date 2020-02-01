@@ -1,7 +1,5 @@
 #include "option.h"
 
-#include <stdio.h> ///////////////////DELETE
-
 static void	active_options(char op, int16_t *opt)
 {
 	if (op == 'l')
@@ -23,7 +21,7 @@ static void	active_options(char op, int16_t *opt)
 	}
 }
 
-void			get_options(int ac, char **av, int16_t *opt, t_list **dir)
+void			get_options(int ac, char **av, int16_t *opt, t_list **input)
 {
 	int		i;
 	int		j;
@@ -42,12 +40,12 @@ void			get_options(int ac, char **av, int16_t *opt, t_list **dir)
 	}
 	if (i == ac)
 	{
-		create_dir("./", 0, 2, dir);
+		create_file("", "./", input, *opt);
 		return ;
 	}
 	while (i < ac)
 	{
-		create_dir(av[i], 0, ft_strlen(av[i]), dir);
+		create_file("", av[i], input, *opt);
 		i++;
 	}
 }

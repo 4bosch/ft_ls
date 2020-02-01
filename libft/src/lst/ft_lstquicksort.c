@@ -1,5 +1,4 @@
-#include "ft/list.h"
-#include "ft/stdio.h"
+#include "libft.h"
 
 void	ft_lstquicksort(t_list **lst, int (*cmp)(t_list *e1, t_list *e2))
 {
@@ -18,5 +17,5 @@ void	ft_lstquicksort(t_list **lst, int (*cmp)(t_list *e1, t_list *e2))
 		*lst = tab[0];
 	}
 	else
-		ft_printf("Your list equal NULL\n");
+		ft_printerr("Your list equal NULL\n");
 }

@@ -1,16 +1,27 @@
 #include "dir.h"
 
-int		is_dir(char *path)
+void		move_dir(t_list **input, t_list **dir)
 {
-	struct stat sbuf;
+	t_list	*tmp;
+	t_list	*next;
 
-	lstat(path, &sbuf);
-	if (S_ISDIR(sbuf.st_mode))
-		return (1);
-	else
-		return (0);
+	tmp = *input;
+	while (tmp->next != NULL)
+	{
+		next = tmp->next;
+		if (S_ISDIR(((t_file*)next->content)->sbuf.st_mode))
+		{
+			ft_lstadd(dir, next);
+			tmp->next = next->next;
+		}
+		tmp = next;
+	}
+	if (S_ISDIR(((t_file*)(*input)->content)->sbuf.st_mode))
+	{
+		ft_lstadd(dir, *input);
+		*input = (*input)->next;
+	}
 }
-
 
 void		create_dir(char *name, int path_len, int name_len, t_list **list)
 {

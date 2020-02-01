@@ -38,10 +38,5 @@ int			rtime_cmp(t_list *e1, t_list *e2)
 
 int			dname_cmp(t_list *e1, t_list *e2)
 {
-	if (is_dir(((t_dir*)e1->content)->name))
-		return (0);
-	else if (is_dir(((t_dir*)e2->content)->name))
-		return (1);
-	else
 		return ((ft_strcmp(((t_dir*)e1->content)->name, ((t_dir*)e2->content)->name) < 0) ? 1 : 0);
 }

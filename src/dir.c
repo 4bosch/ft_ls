@@ -1,11 +1,41 @@
 #include "dir.h"
 
+static void	file2dir(t_list **dir)
+{
+	t_list	*lst;
+	t_list	*tmp;
+	t_list	*del;
+
+	if (dir == NULL)
+		return ;
+	lst = *dir;
+	tmp = NULL;
+	while (lst != NULL)
+	{
+		create_dir(((t_file*)lst->content)->name, ((t_file*)lst->content)->path_len, ((t_file*)lst->content)->name_len, &tmp);
+		del = lst;
+		lst = lst->next;
+		free(((t_file*)del->content)->name);
+		free(del->content);
+		free(del);
+	}
+	*dir = NULL;
+	while (tmp != NULL)
+	{
+		lst = tmp;
+		tmp = tmp->next;
+		ft_lstadd(dir, lst);
+	}
+}
+
 void		move_dir(t_list **input, t_list **dir)
 {
-	t_list	*tmp;
+	t_list	*prev;
+	t_list	*curr;
 	t_list	*next;
 
-	tmp = *input;
+	prev = NULL;
+	curr = *input;
 	while (tmp->next != NULL)
 	{
 		next = tmp->next;
@@ -14,13 +44,14 @@ void		move_dir(t_list **input, t_list **dir)
 			ft_lstadd(dir, next);
 			tmp->next = next->next;
 		}
-		tmp = next;
+		tmp = tmp->next;
 	}
 	if (S_ISDIR(((t_file*)(*input)->content)->sbuf.st_mode))
 	{
 		ft_lstadd(dir, *input);
 		*input = (*input)->next;
 	}
+	file2dir(dir);
 }
 
 void		create_dir(char *name, int path_len, int name_len, t_list **list)

@@ -40,17 +40,20 @@ void     		list_files(char *path, int pathlen, int16_t opt)
 	tab_files = sort(files, opt);
 	if (opt & O_LFORMAT)
 		print_files(tab_files, 0, 1);
-	else    // si long format
+	else
 		print_files(tab_files, 1, 1);
 	if(closedir(dirp) == -1)
-		return ;        //cas erreur a implementer
+		return ;
 }
 
 static void print_inputf(t_list *files, int16_t opt)
 {
 	t_list  **tab;
 
+	if (files == NULL)
+		return ;
 	tab = sort(files, opt);
+	ft_printf("len input : %d\n", ft_lstlen(files));
 	if (opt & O_LFORMAT)
 		print_files(tab, 0, 0);
 	else
@@ -66,10 +69,10 @@ void			ft_ls(char **av, int ac)
 	options = 0;
 	dir = NULL;
 	input = NULL;
-	opt |= O_ONEFILE;
 	get_options(ac, av, &options, &input);
-	opt &= ~O_ONEFILE;
 	move_dir(&input, &dir);
+	print_inputf(input, options);
+	ft_printf("1\n");
 	ft_lstquicksort(&dir, &dname_cmp);
 	while (dir != NULL)
 	{

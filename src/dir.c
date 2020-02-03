@@ -30,6 +30,35 @@ static void	file2dir(t_list **dir)
 
 void		move_dir(t_list **input, t_list **dir)
 {
+	t_list	*prev;
+	t_list	*curr;
+	t_list	*next;
+
+	curr = *input;
+	prev = NULL;
+	while (curr != NULL)
+	{
+		next = curr->next;
+		if (S_ISDIR(((t_file*)curr->content)->sbuf.st_mode))
+		{
+			if (prev != NULL)
+				prev->next = next;
+			else
+				*input = next;
+			ft_lstadd(dir, curr);
+			curr = next;
+		}
+		else
+		{
+			prev = curr;
+			curr = curr->next;
+		}
+	}
+	file2dir(dir);
+}
+/*
+void		move_dir(t_list **input, t_list **dir)
+{
 	t_list	*curr;
 	t_list	*next;
 
@@ -52,6 +81,7 @@ void		move_dir(t_list **input, t_list **dir)
 	}
 	file2dir(dir);
 }
+*/
 
 void		create_dir(char *name, int path_len, int name_len, t_list **list)
 {

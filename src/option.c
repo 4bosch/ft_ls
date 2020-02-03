@@ -38,7 +38,6 @@ void			get_options(int ac, char **av, int16_t *opt, t_list **input)
 		while (av[i][++j] != '\0')
 			active_options(av[i][j], opt);
 	}
-	*opt |= O_ONEFILE;
 	if (i == ac)
 	{
 		create_file("", "./", input, *opt);
@@ -49,5 +48,4 @@ void			get_options(int ac, char **av, int16_t *opt, t_list **input)
 		create_file("", av[i], input, *opt);
 		i++;
 	}
-	*opt &= ~O_ONEFILE;
 }

@@ -30,21 +30,20 @@ static void	file2dir(t_list **dir)
 
 void		move_dir(t_list **input, t_list **dir)
 {
-	t_list	*prev;
 	t_list	*curr;
 	t_list	*next;
 
-	prev = NULL;
 	curr = *input;
-	while (tmp->next != NULL)
+	while (curr->next != NULL)
 	{
-		next = tmp->next;
+		next = curr->next;
 		if (S_ISDIR(((t_file*)next->content)->sbuf.st_mode))
 		{
 			ft_lstadd(dir, next);
-			tmp->next = next->next;
+			curr->next = next->next;
 		}
-		tmp = tmp->next;
+		else
+			curr = curr->next;
 	}
 	if (S_ISDIR(((t_file*)(*input)->content)->sbuf.st_mode))
 	{

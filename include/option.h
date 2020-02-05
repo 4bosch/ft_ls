@@ -13,6 +13,7 @@
 # define O_ONE 64
 # define O_ONEFILE 128
 # define O_RECUR 256
+# define O_HEADER 512
 
 void	get_options(int ac, char **av, int16_t *opt, t_list **dir);
 

@@ -6,7 +6,8 @@
 # include "shared.h"
 # include "libft.h"
 # include "option.h"
+# include "dir.h"
 
-void	create_file(char *path, char *name, t_list **list, int16_t option);
+void	create_file(char *path, char *name, t_list **list, int16_t option, t_list *dir);
 
 #endif

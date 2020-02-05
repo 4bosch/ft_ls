@@ -42,9 +42,10 @@ static void	linkinfo(t_file *file)
 		file->name_len += r + 5;
 }
 
-void		create_file(char *path, char *name, t_list **list, int16_t opt)
+void		create_file(char *path, char *name, t_list **list, int16_t opt, t_list * dir)
 {
 	t_file	*file;
+	t_dir	*tmp;
 
 	if (!(opt & O_ALL) && !(opt & O_ONEFILE) && *name == '.')
 		return ;
@@ -53,8 +54,14 @@ void		create_file(char *path, char *name, t_list **list, int16_t opt)
 	fill_file(path, name, file);
 	if (file_status(file))
 		return ;
-	if ((opt & O_LFORMAT) && ((file->sbuf.st_mode & S_IFMT) == S_IFLNK))
+	if ((opt & O_LFORMAT) && (S_ISLNK(file->sbuf.st_mode)))
 		linkinfo(file);
+	if ((opt & O_RECUR) && (S_ISDIR(file->sbuf.st_mode)))
+	{
+		tmp = NULL;
+		make_dir(file->name, file->path_len, file->name_len, &tmp);
+		ft_lstinsert(dir, ft_lstnew(tmp, sizeof(t_dir)));
+	}
 	if (*list == NULL)
 		*list = ft_lstnew(file, sizeof(t_file));
 	else

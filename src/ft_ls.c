@@ -30,7 +30,7 @@ static t_list	**sort(t_list *files, int16_t opt)
 	}
 }
 
-void			list_files(char *path, int pathlen, int16_t opt)
+void			list_files(char *path, int pathlen, int16_t opt, t_list *dir)
 {
 	DIR				*dirp;
 	struct dirent	*ret;
@@ -46,7 +46,7 @@ void			list_files(char *path, int pathlen, int16_t opt)
 		exit(1);
 	}
 	while ((ret = readdir(dirp)))
-		create_file(path, ret->d_name, &files, opt);
+		create_file(path, ret->d_name, &files, opt, dir);
 	if (files == NULL)
 		return ;
 	tab_files = sort(files, opt);
@@ -92,9 +92,9 @@ void			ft_ls(char **av, int ac)
 	ft_lstquicksort(&dir, &dname_cmp);
 	while (dir != NULL)
 	{
-		if (len != 1 || options & O_RECUR)
+		if (len != 1 || options & O_HEADER)
 			ft_printf("%.*s:\n", D(dir)->name_len, D(dir)->name + D(dir)->path_len);
-		list_files(D(dir)->name, D(dir)->name_len + D(dir)->path_len, options);
+		list_files(D(dir)->name, D(dir)->name_len + D(dir)->path_len, options, dir);
 		if (dir->next != NULL)
 			ft_printf("\n");
 		dir = dir->next;

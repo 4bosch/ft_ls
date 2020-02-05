@@ -6,8 +6,6 @@ static void	file2dir(t_list **dir)
 	t_list	*tmp;
 	t_list	*del;
 
-	if (dir == NULL)
-		return ;
 	lst = *dir;
 	tmp = NULL;
 	while (lst != NULL)
@@ -19,7 +17,6 @@ static void	file2dir(t_list **dir)
 		free(del->content);
 		free(del);
 	}
-	*dir = NULL;
 	while (tmp != NULL)
 	{
 		lst = tmp;
@@ -56,32 +53,6 @@ void		move_dir(t_list **input, t_list **dir)
 	}
 	file2dir(dir);
 }
-/*
-void		move_dir(t_list **input, t_list **dir)
-{
-	t_list	*curr;
-	t_list	*next;
-
-	curr = *input;
-	while (curr->next != NULL)
-	{
-		next = curr->next;
-		if (S_ISDIR(((t_file*)next->content)->sbuf.st_mode))
-		{
-			ft_lstadd(dir, next);
-			curr->next = next->next;
-		}
-		else
-			curr = curr->next;
-	}
-	if (S_ISDIR(((t_file*)(*input)->content)->sbuf.st_mode))
-	{
-		ft_lstadd(dir, *input);
-		*input = (*input)->next;
-	}
-	file2dir(dir);
-}
-*/
 
 void		create_dir(char *name, int path_len, int name_len, t_list **list)
 {

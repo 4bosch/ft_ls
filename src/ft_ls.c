@@ -30,7 +30,26 @@ static t_list	**sort(t_list *files, int16_t opt)
 	}
 }
 
-void			list_files(char *path, int pathlen, int16_t opt, t_list *dir)
+static void		handle_dir(t_list *dir, t_list **tab, int16_t *opt)
+{
+	int		i;
+	t_dir	*tmp;
+
+	if (!(*opt & O_RECUR))
+		return ;
+	*opt |= O_HEADER;
+	i = -1;
+	while (tab[++i] != NULL)
+		if (S_ISDIR(((t_file*)tab[i]->content)->sbuf.st_mode))
+		{
+			ft_printf("name : %s, path_len : %d, name_len : %d\n",((t_file*)tab[i]->content)->name, ((t_file*)tab[i]->content)->path_len, ((t_file*)tab[i]->content)->name_len);
+			make_dir(((t_file*)tab[i]->content)->name, ((t_file*)tab[i]->content)->path_len, ((t_file*)tab[i]->content)->name_len, &tmp);
+			ft_lstinsert(dir, ft_lstnew(tmp, sizeof(tmp)));
+			dir = dir->next;
+		}
+}
+
+void			list_files(char *path, int pathlen, int16_t *opt, t_list *dir)
 {
 	DIR				*dirp;
 	struct dirent	*ret;
@@ -46,11 +65,12 @@ void			list_files(char *path, int pathlen, int16_t opt, t_list *dir)
 		exit(1);
 	}
 	while ((ret = readdir(dirp)))
-		create_file(path, ret->d_name, &files, opt, dir);
+		create_file(path, ret->d_name, &files, *opt);
 	if (files == NULL)
 		return ;
-	tab_files = sort(files, opt);
-	if (opt & O_LFORMAT)
+	tab_files = sort(files, *opt);
+	handle_dir(dir, tab_files, opt);
+	if (*opt & O_LFORMAT)
 		print_files(tab_files, 0, 1);
 	else
 		print_files(tab_files, 1, 1);
@@ -94,7 +114,7 @@ void			ft_ls(char **av, int ac)
 	{
 		if (len != 1 || options & O_HEADER)
 			ft_printf("%.*s:\n", D(dir)->name_len, D(dir)->name + D(dir)->path_len);
-		list_files(D(dir)->name, D(dir)->name_len + D(dir)->path_len, options, dir);
+		list_files(D(dir)->name, D(dir)->name_len + D(dir)->path_len, &options, dir);
 		if (dir->next != NULL)
 			ft_printf("\n");
 		dir = dir->next;

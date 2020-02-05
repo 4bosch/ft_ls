@@ -7,7 +7,7 @@ static void	active_options(char op, int16_t *opt)
 	else if (op == 'r')
 		*opt |= O_REVERSE;
 	else if (op == 'R')
-		*opt |= O_RECURSIVE;
+		*opt |= O_RECUR;
 	else if (op == 't')
 		*opt |= O_TIME;
 	else if (op == 'a')

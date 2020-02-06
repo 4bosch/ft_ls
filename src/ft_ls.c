@@ -42,9 +42,8 @@ static void		handle_dir(t_list *dir, t_list **tab, int16_t *opt)
 	while (tab[++i] != NULL)
 		if (S_ISDIR(((t_file*)tab[i]->content)->sbuf.st_mode))
 		{
-			ft_printf("name : %s, path_len : %d, name_len : %d\n",((t_file*)tab[i]->content)->name, ((t_file*)tab[i]->content)->path_len, ((t_file*)tab[i]->content)->name_len);
 			make_dir(((t_file*)tab[i]->content)->name, ((t_file*)tab[i]->content)->path_len, ((t_file*)tab[i]->content)->name_len, &tmp);
-			ft_lstinsert(dir, ft_lstnew(tmp, sizeof(tmp)));
+			ft_lstinsert(dir, ft_lstnew(tmp, sizeof(t_dir)));
 			dir = dir->next;
 		}
 }
@@ -106,13 +105,13 @@ void			ft_ls(char **av, int ac)
 	options |= O_ONEFILE;
 	get_options(ac, av, &options, &input);
 	options &= ~O_ONEFILE;
-	len = ft_lstlen(input);
 	move_dir(&input, &dir);
 	print_inputf(input, dir, options);
 	ft_lstquicksort(&dir, &dname_cmp);
+	len = ft_lstlen(dir);
 	while (dir != NULL)
 	{
-		if (len != 1 || options & O_HEADER)
+		if (len > 1 || options & O_HEADER)
 			ft_printf("%.*s:\n", D(dir)->name_len, D(dir)->name + D(dir)->path_len);
 		list_files(D(dir)->name, D(dir)->name_len + D(dir)->path_len, &options, dir);
 		if (dir->next != NULL)

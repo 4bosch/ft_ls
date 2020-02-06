@@ -59,7 +59,9 @@ void		make_dir(char *name, int path_len, int name_len, t_dir **dir)
 	else
 	{
 		if (name[path_len + name_len] != '/')
+		{
 			(*dir)->name = ft_strnew((*dir)->path_len + (*dir)->name_len + 1);
+		}
 		else
 			(*dir)->name = ft_strnew((*dir)->path_len + (*dir)->name_len);
 		ft_strncpy((*dir)->name, name, (*dir)->path_len + (*dir)->name_len);

@@ -112,7 +112,7 @@ void			ft_ls(char **av, int ac)
 	while (dir != NULL)
 	{
 		if (len > 1 || options & O_HEADER)
-			ft_printf("%.*s:\n", D(dir)->name_len, D(dir)->name + D(dir)->path_len);
+			ft_printf("%s:\n", D(dir)->name);
 		list_files(D(dir)->name, D(dir)->name_len + D(dir)->path_len, &options, dir);
 		if (dir->next != NULL)
 			ft_printf("\n");

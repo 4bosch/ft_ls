@@ -60,3 +60,9 @@ void		create_file(char *path, char *name, t_list **list, int16_t opt)
 	else
 		ft_lstadd(list, ft_lstnew(file, sizeof(t_file)));
 }
+
+void		destroy_file(t_list *file)
+{
+	free(((t_file*)file->content)->name);
+	free(file->content);
+}

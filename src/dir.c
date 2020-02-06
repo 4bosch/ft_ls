@@ -78,3 +78,10 @@ void		create_dir(char *name, int path_len, int name_len, t_list **list)
 	else
 		ft_lstadd(list, ft_lstnew(dir, sizeof(t_dir)));
 }
+
+void		destroy_dir(t_list *dir)
+{
+	free(((t_dir*)dir->content)->name);
+	free(dir->content);
+	free(dir);
+}

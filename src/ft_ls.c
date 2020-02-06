@@ -61,16 +61,18 @@ void			list_files(char *path, int pathlen, int16_t *opt, t_list *dir)
 	if (!(dirp = opendir(path)))
 	{
 		ft_printerr("ft_ls: %.*s: %s\n", ft_strlen(path) - 1, path, strerror(errno));
-		exit(1);
+		return ;
 	}
 	while ((ret = readdir(dirp)))
 		create_file(path, ret->d_name, &files, *opt);
-	tab_files = sort(files, *opt);
-	handle_dir(dir, tab_files, opt);
-	if (*opt & O_LFORMAT)
-		print_files(tab_files, 0, 1);
-	else
-		print_files(tab_files, 1, 1);
+	if ((tab_files = sort(files, *opt)) != NULL)
+	{
+		handle_dir(dir, tab_files, opt);
+		if (*opt & O_LFORMAT)
+			print_files(tab_files, 0, 1);
+		else
+			print_files(tab_files, 1, 1);
+	}
 	if(closedir(dirp) == -1)
 		ft_printerr("close dir didn't work with %p\n", dirp);
 }

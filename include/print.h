@@ -8,6 +8,7 @@
 
 # include "shared.h"
 # include "libft.h"
+# include "file.h"
 
 typedef struct		s_max
 {

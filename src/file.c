@@ -61,8 +61,15 @@ void		create_file(char *path, char *name, t_list **list, int16_t opt)
 		ft_lstadd(list, ft_lstnew(file, sizeof(t_file)));
 }
 
-void		destroy_file(t_list *file)
+void		destroy_files(t_list **tab)
 {
-	free(((t_file*)file->content)->name);
-	free(file->content);
+	int	i;
+
+	i = -1;
+	while (tab[++i] != NULL)
+	{
+		free(((t_file*)tab[i]->content)->name);
+		free(tab[i]->content);
+		free(tab[i]);
+	}
 }

@@ -65,7 +65,9 @@ void		print_files(t_list **tab, char lf, char dir)
 	t_max	max;
 
 	i = -1;
-	if (lf)
+	if (tab == NULL)
+		return ;
+	else if (lf)
 	{
 		while (tab[++i] != NULL)
 			ft_printf("%s\n", ((t_file*)tab[i]->content)->name + ((t_file*)tab[i]->content)->path_len);
@@ -79,4 +81,5 @@ void		print_files(t_list **tab, char lf, char dir)
 		while (tab[++i] != NULL)
 			long_print((t_file*)tab[i]->content, max);
 	}
+	destroy_files(tab);
 }

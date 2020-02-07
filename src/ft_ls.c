@@ -35,7 +35,7 @@ static void		handle_dir(t_list *dir, t_list **tab, int16_t *opt)
 	int		i;
 	t_dir	*tmp;
 
-	if (!(*opt & O_RECUR))
+	if (!(*opt & O_RECUR) || tab == NULL)
 		return ;
 	*opt |= O_HEADER;
 	i = -1;
@@ -65,16 +65,14 @@ void			list_files(char *path, int pathlen, int16_t *opt, t_list *dir)
 	}
 	while ((ret = readdir(dirp)))
 		create_file(path, ret->d_name, &files, *opt);
-	if ((tab_files = sort(files, *opt)) != NULL)
-	{
-		handle_dir(dir, tab_files, opt);
-		if (*opt & O_LFORMAT)
-			print_files(tab_files, 0, 1);
-		else
-			print_files(tab_files, 1, 1);
-	}
+	tab_files = sort(files, *opt);
+	handle_dir(dir, tab_files, opt);
+	if (*opt & O_LFORMAT)
+		print_files(tab_files, 0, 1);
+	else
+		print_files(tab_files, 1, 1);
 	if(closedir(dirp) == -1)
-		ft_printerr("close dir didn't work with %p\n", dirp);
+		ft_puterr("Closedir failed", 2);
 }
 
 static void		print_inputf(t_list *files, t_list *dir, int16_t opt)
@@ -113,7 +111,7 @@ void			ft_ls(char **av, int ac)
 	{
 		if (len > 1 || options & O_HEADER)
 			ft_printf("%s:\n", D(dir)->name);
-		list_files(D(dir)->name, D(dir)->name_len + D(dir)->path_len, &options, dir);
+		list_files(((t_dir*)dir->content)->name, ((t_dir*)dir->content)->name_len + ((t_dir*)dir->content)->path_len, &options, dir);
 		if (dir->next != NULL)
 			ft_printf("\n");
 		dir = dir->next;

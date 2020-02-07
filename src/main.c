@@ -20,5 +20,6 @@ int	g_status = 0;
 int			main(int ac, char **av)
 {
 	ft_ls(av, ac);
+	while (1) ;
 	return (g_status);
 }

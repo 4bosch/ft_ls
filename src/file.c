@@ -6,7 +6,7 @@
 /*   By: abosch <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 13:55:02 by abosch            #+#    #+#             */
-/*   Updated: 2020/02/07 15:38:39 by abosch           ###   ########.fr       */
+/*   Updated: 2020/02/08 17:14:55 by abosch           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void		create_file(char *path, char *name, t_list **list, int16_t opt)
 		*list = ft_lstnew(file, sizeof(t_file));
 	else
 		ft_lstadd(list, ft_lstnew(file, sizeof(t_file)));
+	free(file);
 }
 
 void		destroy_files(t_list **tab)
@@ -80,12 +81,9 @@ void		destroy_files(t_list **tab)
 	i = -1;
 	while (tab[++i] != NULL)
 	{
-		ft_printf("destroying %s\n", ((t_file*)tab[i]->content)->name);
 		free(((t_file*)tab[i]->content)->name);
 		free(tab[i]->content);
-		ft_printf("create : WAT :%p\n", tab);
 		free(tab[i]);
-		ft_printf("create : WAT :%p\n", tab);
 	}
 	free(tab);
 }

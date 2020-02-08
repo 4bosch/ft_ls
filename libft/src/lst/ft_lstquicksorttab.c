@@ -6,7 +6,7 @@
 /*   By: abosch <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/02 16:20:09 by abosch            #+#    #+#             */
-/*   Updated: 2020/02/07 14:04:08 by abosch           ###   ########.fr       */
+/*   Updated: 2020/02/08 15:16:43 by abosch           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,6 @@ static void		quicksort(t_list **tab, int low, int high, int (*cmp)(t_list *e1, t
 	}
 }
 
-
 t_list			**ft_lstquicksorttab(t_list *lst, int (*cmp)(t_list *e1, t_list *e2))
 {
 	t_list	**tab;
@@ -107,6 +106,7 @@ t_list			**ft_lstquicksorttab(t_list *lst, int (*cmp)(t_list *e1, t_list *e2))
 	{
 		if ((len = ft_lstlen(lst)) <= 0)
 			return (NULL);
+
 		tab = lst2tab(lst);
 		quicksort(tab, 0, len - 1, cmp);
 		tab[len] = NULL;

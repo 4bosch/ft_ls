@@ -6,7 +6,7 @@
 #    By: abosch <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/08 13:36:55 by abosch            #+#    #+#              #
-#    Updated: 2019/05/10 15:54:43 by abosch           ###   ########.fr        #
+#    Updated: 2020/02/08 16:56:08 by abosch           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ SRC_STDIO_PATH := $(SRC_PATH)/stdio
 
 OBJ_PATH = obj
 
-INC_PATH = include
+INC_PATH = include 
 #-----------------------#
 
 
@@ -72,7 +72,7 @@ LIB_FLAG := -I$(INC_PATH)
 
 OPTI_FLAG = -O3
 
-CFLAGS = -Werror -Wextra -Wall
+CFLAGS = -Werror -Wextra -Wall -g3
 #----------------------#
 
 NAME = libft.a

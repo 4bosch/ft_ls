@@ -81,5 +81,7 @@ void		print_files(t_list **tab, char lf, char dir)
 		while (tab[++i] != NULL)
 			long_print((t_file*)tab[i]->content, max);
 	}
+	ft_printf("create : INe :%p\n", tab[0]->content);
 	destroy_files(tab);
+	ft_printf("create : two :%p\n", tab[0]->content);
 }

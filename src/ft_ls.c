@@ -6,7 +6,7 @@
 /*   By: abosch <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 18:32:52 by abosch            #+#    #+#             */
-/*   Updated: 2020/02/06 18:28:58 by abosch           ###   ########.fr       */
+/*   Updated: 2020/02/07 15:57:24 by abosch           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,13 +107,15 @@ void			ft_ls(char **av, int ac)
 	print_inputf(input, dir, options);
 	ft_lstquicksort(&dir, &dname_cmp);
 	len = ft_lstlen(dir);
+	input = dir;
 	while (dir != NULL)
 	{
 		if (len > 1 || options & O_HEADER)
-			ft_printf("%s:\n", D(dir)->name);
+			ft_printf("%s:\n", ((t_dir*)dir->content)->name);
 		list_files(((t_dir*)dir->content)->name, ((t_dir*)dir->content)->name_len + ((t_dir*)dir->content)->path_len, &options, dir);
 		if (dir->next != NULL)
 			ft_printf("\n");
 		dir = dir->next;
 	}
+	destroy_dir(input);
 }

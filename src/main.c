@@ -6,7 +6,7 @@
 /*   By: abosch <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/02 16:20:18 by abosch            #+#    #+#             */
-/*   Updated: 2019/10/02 16:54:19 by abosch           ###   ########.fr       */
+/*   Updated: 2020/02/07 15:52:19 by abosch           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	g_status = 0;
 int			main(int ac, char **av)
 {
 	ft_ls(av, ac);
-	while (1) ;
+	ft_printf("%zu :|:  %zu\n",  sizeof(t_file), sizeof(t_dir));
+	/* while(1); */
 	return (g_status);
 }

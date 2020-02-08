@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   file.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abosch <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/07 13:55:02 by abosch            #+#    #+#             */
+/*   Updated: 2020/02/07 15:38:39 by abosch           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "file.h"
 
 static void	fill_file(char *path, char *name, t_file *file)
@@ -30,16 +42,16 @@ static void	linkinfo(t_file *file)
 	char	*tmp;
 	int		r;
 
-		r = readlink(file->name, linkbuf, 1024);
-		if (r < 0)
-			ft_printerr("ft_ls: readlink: %s\n", strerror(errno));
-		linkbuf[r] = '\0';
-		tmp = ft_strnew(ft_strlen(file->name) + r + 5);
-		ft_strcpy(tmp, file->name);
-		ft_strcat(ft_strcat(tmp, " -> "), linkbuf);
-		free(file->name);
-		file->name = tmp;
-		file->name_len += r + 5;
+	r = readlink(file->name, linkbuf, 1024);
+	if (r < 0)
+		ft_printerr("ft_ls: readlink: %s\n", strerror(errno));
+	linkbuf[r] = '\0';
+	tmp = ft_strnew(ft_strlen(file->name) + r + 5);
+	ft_strcpy(tmp, file->name);
+	ft_strcat(ft_strcat(tmp, " -> "), linkbuf);
+	free(file->name);
+	file->name = tmp;
+	file->name_len += r + 5;
 }
 
 void		create_file(char *path, char *name, t_list **list, int16_t opt)
@@ -68,8 +80,12 @@ void		destroy_files(t_list **tab)
 	i = -1;
 	while (tab[++i] != NULL)
 	{
+		ft_printf("destroying %s\n", ((t_file*)tab[i]->content)->name);
 		free(((t_file*)tab[i]->content)->name);
 		free(tab[i]->content);
+		ft_printf("create : WAT :%p\n", tab);
 		free(tab[i]);
+		ft_printf("create : WAT :%p\n", tab);
 	}
+	free(tab);
 }

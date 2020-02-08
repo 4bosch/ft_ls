@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   dir.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abosch <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/07 13:54:53 by abosch            #+#    #+#             */
+/*   Updated: 2020/02/07 13:54:54 by abosch           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "dir.h"
 
 static void	file2dir(t_list **dir)
@@ -81,7 +93,16 @@ void		create_dir(char *name, int path_len, int name_len, t_list **list)
 
 void		destroy_dir(t_list *dir)
 {
-	free(((t_dir*)dir->content)->name);
-	free(dir->content);
-	free(dir);
+	t_list *del;
+
+	//ft_printf("input of destroy dir %p\n", dir);
+	while (dir != NULL)
+	{
+		del = dir;
+		dir = dir->next;
+	//	ft_printf("destroying %s\n", ((t_dir*)del->content)->name);
+		free(((t_dir*)del->content)->name);
+		free(del->content);
+		free(del);
+	}
 }

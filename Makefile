@@ -6,7 +6,7 @@
 #    By: abosch <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/08 13:36:55 by abosch            #+#    #+#              #
-#    Updated: 2019/05/16 09:32:03 by abosch           ###   ########.fr        #
+#    Updated: 2020/02/07 12:20:21 by abosch           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ NAME = ft_ls
 CC = clang
 CFLAGS = -Werror -Wextra -Wall
 
-CPPFLAGS = -I$(INC_PATH) -Ilibft/$(INC_PATH)
+CPPFLAGS = -I$(INC_PATH) -Ilibft/$(INC_PATH) -ggdb3
 OPTIFLAGS = -O3
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#

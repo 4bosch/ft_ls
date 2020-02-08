@@ -3,3 +3,7 @@ todo
 obj
 libft/libft.a
 ft_ls
+ft_ls.dSYM/
+tags
+valgrind1.txt
+valgrind2.txt

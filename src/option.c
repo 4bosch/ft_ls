@@ -6,7 +6,7 @@
 /*   By: abosch <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 13:55:24 by abosch            #+#    #+#             */
-/*   Updated: 2020/02/07 13:55:25 by abosch           ###   ########.fr       */
+/*   Updated: 2020/02/08 17:55:48 by abosch           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ void			get_options(int ac, char **av, int16_t *opt, t_list **input)
 	if (i == ac)
 	{
 		create_file("", "./", input, *opt);
-		ft_printf("cyka\n");
 		return ;
 	}
 	while (i < ac)

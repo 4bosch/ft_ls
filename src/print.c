@@ -6,7 +6,7 @@
 /*   By: abosch <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/02 16:20:27 by abosch            #+#    #+#             */
-/*   Updated: 2020/02/08 15:24:30 by abosch           ###   ########.fr       */
+/*   Updated: 2020/02/08 17:55:59 by abosch           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ void		print_files(t_list **tab, char lf, char dir)
 	t_max	max;
 
 	i = -1;
-	ft_printf("create : INe :%p\n", tab[0]->content);
 	if (tab == NULL)
 		return ;
 	else if (lf)
@@ -82,6 +81,5 @@ void		print_files(t_list **tab, char lf, char dir)
 		while (tab[++i] != NULL)
 			long_print((t_file*)tab[i]->content, max);
 	}
-	ft_printf("create : two :%p\n", tab[0]->content);
 	destroy_files(tab);
 }

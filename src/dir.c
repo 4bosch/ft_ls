@@ -6,7 +6,7 @@
 /*   By: abosch <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 13:54:53 by abosch            #+#    #+#             */
-/*   Updated: 2020/02/07 13:54:54 by abosch           ###   ########.fr       */
+/*   Updated: 2020/02/08 17:54:04 by abosch           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ void		create_dir(char *name, int path_len, int name_len, t_list **list)
 		*list = ft_lstnew(dir, sizeof(t_dir));
 	else
 		ft_lstadd(list, ft_lstnew(dir, sizeof(t_dir)));
+	free(dir);
 }
 
 void		destroy_dir(t_list *dir)

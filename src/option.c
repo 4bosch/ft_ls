@@ -55,9 +55,13 @@ void			get_options(int ac, char **av, int16_t *opt, t_list **input)
 		create_file("", "./", input, *opt);
 		return ;
 	}
+	j = 0;
 	while (i < ac)
 	{
 		create_file("", av[i], input, *opt);
+		if (j > 0)
+			*opt |= O_HEADER;
 		i++;
+		j++;
 	}
 }

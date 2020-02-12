@@ -9,7 +9,6 @@
 /*   Updated: 2020/02/07 15:57:24 by abosch           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "ft_ls.h"
 
 static t_list	**sort(t_list *files, int16_t opt)
@@ -40,12 +39,15 @@ static void		handle_dir(t_list *dir, t_list **tab, int16_t *opt)
 	*opt |= O_HEADER;
 	i = -1;
 	while (tab[++i] != NULL)
-		if (S_ISDIR(((t_file*)tab[i]->content)->sbuf.st_mode))
+	{
+		if (S_ISDIR(((t_file*)tab[i]->content)->sbuf.st_mode) && ft_strcmp(((t_file*)tab[i]->content)->name + ((t_file*)tab[i]->content)->path_len, ".") && ft_strcmp(((t_file*)tab[i]->content)->name + ((t_file*)tab[i]->content)->path_len, ".."))
 		{
 			make_dir(((t_file*)tab[i]->content)->name, ((t_file*)tab[i]->content)->path_len, ((t_file*)tab[i]->content)->name_len, &tmp);
 			ft_lstinsert(dir, ft_lstnew(tmp, sizeof(t_dir)));
+			free(tmp);
 			dir = dir->next;
 		}
+	}
 }
 
 void			list_files(char *path, int pathlen, int16_t *opt, t_list *dir)
@@ -92,7 +94,6 @@ static void		print_inputf(t_list *files, t_list *dir, int16_t opt)
 
 void			ft_ls(char **av, int ac)
 {
-	int		len;
 	int16_t	options;
 	t_list	*dir;
 	t_list	*input;
@@ -106,11 +107,10 @@ void			ft_ls(char **av, int ac)
 	move_dir(&input, &dir);
 	print_inputf(input, dir, options);
 	ft_lstquicksort(&dir, &dname_cmp);
-	len = ft_lstlen(dir);
 	input = dir;
 	while (dir != NULL)
 	{
-		if (len > 1 || options & O_HEADER)
+		if (options & O_HEADER)
 			ft_printf("%s:\n", ((t_dir*)dir->content)->name);
 		list_files(((t_dir*)dir->content)->name, ((t_dir*)dir->content)->name_len + ((t_dir*)dir->content)->path_len, &options, dir);
 		if (dir->next != NULL)

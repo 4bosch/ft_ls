@@ -1,0 +1,13 @@
+mkdir tmp;
+cd tmp;
+mkdir a;
+ln -s a b;
+rm -rf a;
+echo "\n===== LS =====";
+ls -1 b;
+echo "==============\n";
+echo "=== FT_LS ====";
+ft_ls -1 b;
+echo "==============\n";
+cd ..;
+rm -rf tmp;

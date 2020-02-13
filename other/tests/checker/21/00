@@ -1,0 +1,11 @@
+mkdir tmp;
+cd tmp;
+mkdir mydir && ln -s mydir symdir && touch mydir/file{1..5};
+echo "\n===== LS =====";
+ls -1 symdir;
+echo "==============\n";
+echo "=== FT_LS ====";
+ft_ls -1 symdir;
+echo "==============\n";
+cd ..;
+rm -rf tmp;

@@ -9,6 +9,7 @@
 # include "print.h"
 # include "option.h"
 # include "cmp.h"
+# include "destroy.h"
 
 void	ft_ls(char **av, int ac);
 

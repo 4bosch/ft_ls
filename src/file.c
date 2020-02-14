@@ -74,16 +74,3 @@ void		create_file(char *path, char *name, t_list **list, int16_t opt)
 	free(file);
 }
 
-void		destroy_files(t_list **tab)
-{
-	int	i;
-
-	i = -1;
-	while (tab[++i] != NULL)
-	{
-		free(((t_file*)tab[i]->content)->name);
-		free(tab[i]->content);
-		free(tab[i]);
-	}
-	free(tab);
-}

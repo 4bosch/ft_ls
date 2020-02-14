@@ -36,13 +36,23 @@ static void	permissions(t_file *file)
 		ft_printf("p");
     ft_printf((file->sbuf.st_mode & S_IRUSR) ? "r" : "-");
     ft_printf((file->sbuf.st_mode & S_IWUSR) ? "w" : "-");
-    ft_printf((file->sbuf.st_mode & S_IXUSR) ? "x" : "-");
+	if (file->sbuf.st_mode & S_IXUSR)
+		ft_printf((file->sbuf.st_mode & S_ISUID) ? "s" : "x");
+	else
+		ft_printf((file->sbuf.st_mode & S_ISUID) ? "S" : "-");
     ft_printf((file->sbuf.st_mode & S_IRGRP) ? "r" : "-");
     ft_printf((file->sbuf.st_mode & S_IWGRP) ? "w" : "-");
-    ft_printf((file->sbuf.st_mode & S_IXGRP) ? "x" : "-");
+	if (file->sbuf.st_mode & S_IXGRP)
+		ft_printf((file->sbuf.st_mode & S_ISGID) ? "s" : "x");
+	else
+		ft_printf((file->sbuf.st_mode & S_ISGID) ? "S" : "-");
     ft_printf((file->sbuf.st_mode & S_IROTH) ? "r" : "-");
     ft_printf((file->sbuf.st_mode & S_IWOTH) ? "w" : "-");
-    ft_printf((file->sbuf.st_mode & S_IXOTH) ? "x" : "-");
+	if (file->sbuf.st_mode & S_IXOTH)
+		ft_printf((file->sbuf.st_mode & S_ISVTX) ? "t" : "x");
+	else
+		ft_printf((file->sbuf.st_mode & S_ISVTX) ? "T" : "-");
+	
 }
 
 void		long_print(t_file *file, t_max max)

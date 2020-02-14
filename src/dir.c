@@ -30,9 +30,9 @@ static void	file2dir(t_list **dir)
 
 void		move_dir(t_list **input, t_list **dir)
 {
-	t_list	*prev;
-	t_list	*curr;
-	t_list	*next;
+	t_list		*prev;
+	t_list		*curr;
+	t_list		*next;
 
 	curr = *input;
 	prev = NULL;
@@ -92,18 +92,3 @@ void		create_dir(char *name, int path_len, int name_len, t_list **list)
 	free(dir);
 }
 
-void		destroy_dir(t_list *dir)
-{
-	t_list *del;
-
-	//ft_printf("input of destroy dir %p\n", dir);
-	while (dir != NULL)
-	{
-		del = dir;
-		dir = dir->next;
-	//	ft_printf("destroying %s\n", ((t_dir*)del->content)->name);
-		free(((t_dir*)del->content)->name);
-		free(del->content);
-		free(del);
-	}
-}

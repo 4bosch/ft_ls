@@ -40,9 +40,15 @@ static void		handle_dir(t_list *dir, t_list **tab, int16_t *opt)
 	i = -1;
 	while (tab[++i] != NULL)
 	{
-		if (S_ISDIR(((t_file*)tab[i]->content)->sbuf.st_mode) && ft_strcmp(((t_file*)tab[i]->content)->name + ((t_file*)tab[i]->content)->path_len, ".") && ft_strcmp(((t_file*)tab[i]->content)->name + ((t_file*)tab[i]->content)->path_len, ".."))
+		if (S_ISDIR(((t_file*)tab[i]->content)->sbuf.st_mode)
+			&& ft_strcmp(((t_file*)tab[i]->content)->name
+			+ ((t_file*)tab[i]->content)->path_len, ".")
+			&& ft_strcmp(((t_file*)tab[i]->content)->name
+			+ ((t_file*)tab[i]->content)->path_len, ".."))
 		{
-			make_dir(((t_file*)tab[i]->content)->name, ((t_file*)tab[i]->content)->path_len, ((t_file*)tab[i]->content)->name_len, &tmp);
+			make_dir(((t_file*)tab[i]->content)->name,
+				((t_file*)tab[i]->content)->path_len,
+				((t_file*)tab[i]->content)->name_len, &tmp);
 			ft_lstinsert(dir, ft_lstnew(tmp, sizeof(t_dir)));
 			free(tmp);
 			dir = dir->next;
@@ -62,7 +68,8 @@ void			list_files(char *path, int pathlen, int16_t *opt, t_list *dir)
 		path[pathlen] = '/';
 	if (!(dirp = opendir(path)))
 	{
-		ft_printerr("ft_ls: %.*s: %s\n", ft_strlen(path) - 1, path, strerror(errno));
+		ft_printerr("ft_ls: %.*s: %s\n", ft_strlen(path) - 1, path,
+			strerror(errno));
 		return ;
 	}
 	while ((ret = readdir(dirp)))
@@ -70,9 +77,9 @@ void			list_files(char *path, int pathlen, int16_t *opt, t_list *dir)
 	tab_files = sort(files, *opt);
 	handle_dir(dir, tab_files, opt);
 	if (*opt & O_LFORMAT)
-		print_files(tab_files, 0, 1);
+		print_files(tab_files, 1, *opt);
 	else
-		print_files(tab_files, 1, 1);
+		print_files(tab_files, 1, *opt);
 	if(closedir(dirp) == -1)
 		ft_puterr("Closedir failed", 2);
 }
@@ -85,9 +92,9 @@ static void		print_inputf(t_list *files, t_list *dir, int16_t opt)
 		return ;
 	tab = sort(files, opt);
 	if (opt & O_LFORMAT)
-		print_files(tab, 0, 0);
+		print_files(tab, 0, opt);
 	else
-		print_files(tab, 1, 0);
+		print_files(tab, 0, opt);
 	if (dir != NULL)
 		ft_printf("\n");
 }
@@ -112,7 +119,8 @@ void			ft_ls(char **av, int ac)
 	{
 		if (options & O_HEADER)
 			ft_printf("%s:\n", ((t_dir*)dir->content)->name);
-		list_files(((t_dir*)dir->content)->name, ((t_dir*)dir->content)->name_len + ((t_dir*)dir->content)->path_len, &options, dir);
+		list_files(((t_dir*)dir->content)->name, ((t_dir*)dir->content)->name_len
+			+ ((t_dir*)dir->content)->path_len, &options, dir);
 		if (dir->next != NULL)
 			ft_printf("\n");
 		dir = dir->next;

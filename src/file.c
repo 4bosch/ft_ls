@@ -21,13 +21,19 @@ static void	fill_file(char *path, char *name, t_file *file)
 	ft_strcat(file->name, name);
 }
 
-static int	file_status(t_file *file)
+static int	file_status(t_file *file, int16_t opt)
 {
+	int			ret;
 	extern int	g_status;
 
-	if((lstat(file->name, &file->sbuf)) == -1)
+	if (O_LFORMAT & opt && file->name[file->name_len + file->path_len] != '/')
+		ret = lstat(file->name, &file->sbuf);
+	else
+		ret = stat(file->name, &file->sbuf);
+	if(ret == -1)
 	{
-		ft_printerr("ft_ls: %s: %s\n", file->name + file->path_len, strerror(errno));
+		ft_printerr("ft_ls: %s: %s\n", file->name + file->path_len,
+			strerror(errno));
 		free(file->name);
 		free(file);
 		g_status = 1;
@@ -36,23 +42,6 @@ static int	file_status(t_file *file)
 	return (0);
 }
 
-static void	linkinfo(t_file *file)
-{
-	char	linkbuf[1024];
-	char	*tmp;
-	int		r;
-
-	r = readlink(file->name, linkbuf, 1024);
-	if (r < 0)
-		ft_printerr("ft_ls: readlink: %s\n", strerror(errno));
-	linkbuf[r] = '\0';
-	tmp = ft_strnew(ft_strlen(file->name) + r + 5);
-	ft_strcpy(tmp, file->name);
-	ft_strcat(ft_strcat(tmp, " -> "), linkbuf);
-	free(file->name);
-	file->name = tmp;
-	file->name_len += r + 5;
-}
 
 void		create_file(char *path, char *name, t_list **list, int16_t opt)
 {
@@ -63,14 +52,11 @@ void		create_file(char *path, char *name, t_list **list, int16_t opt)
 	if (!(file = (t_file*)malloc(sizeof(t_file))))
 		ft_puterr("Malloc failed\n", 2);
 	fill_file(path, name, file);
-	if (file_status(file))
+	if (file_status(file, opt))
 		return ;
-	if ((opt & O_LFORMAT) && (S_ISLNK(file->sbuf.st_mode)))
-		linkinfo(file);
 	if (*list == NULL)
 		*list = ft_lstnew(file, sizeof(t_file));
 	else
 		ft_lstadd(list, ft_lstnew(file, sizeof(t_file)));
 	free(file);
 }
-

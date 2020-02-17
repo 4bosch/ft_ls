@@ -17,6 +17,25 @@
 #define TEN_MILENIA 253402297200
 #define SIX_MONTHS 15778800
 
+static void	more_permission(t_file *file)
+{
+	if (file->sbuf.st_mode & S_IXUSR)
+		ft_printf((file->sbuf.st_mode & S_ISUID) ? "s" : "x");
+	else
+		ft_printf((file->sbuf.st_mode & S_ISUID) ? "S" : "-");
+    ft_printf((file->sbuf.st_mode & S_IRGRP) ? "r" : "-");
+    ft_printf((file->sbuf.st_mode & S_IWGRP) ? "w" : "-");
+	if (file->sbuf.st_mode & S_IXGRP)
+		ft_printf((file->sbuf.st_mode & S_ISGID) ? "s" : "x");
+	else
+		ft_printf((file->sbuf.st_mode & S_ISGID) ? "S" : "-");
+    ft_printf((file->sbuf.st_mode & S_IROTH) ? "r" : "-");
+    ft_printf((file->sbuf.st_mode & S_IWOTH) ? "w" : "-");
+	if (file->sbuf.st_mode & S_IXOTH)
+		ft_printf((file->sbuf.st_mode & S_ISVTX) ? "t" : "x");
+	else
+		ft_printf((file->sbuf.st_mode & S_ISVTX) ? "T" : "-");
+}
 
 static void	permissions(t_file *file)
 {
@@ -36,23 +55,19 @@ static void	permissions(t_file *file)
 		ft_printf("p");
     ft_printf((file->sbuf.st_mode & S_IRUSR) ? "r" : "-");
     ft_printf((file->sbuf.st_mode & S_IWUSR) ? "w" : "-");
-	if (file->sbuf.st_mode & S_IXUSR)
-		ft_printf((file->sbuf.st_mode & S_ISUID) ? "s" : "x");
-	else
-		ft_printf((file->sbuf.st_mode & S_ISUID) ? "S" : "-");
-    ft_printf((file->sbuf.st_mode & S_IRGRP) ? "r" : "-");
-    ft_printf((file->sbuf.st_mode & S_IWGRP) ? "w" : "-");
-	if (file->sbuf.st_mode & S_IXGRP)
-		ft_printf((file->sbuf.st_mode & S_ISGID) ? "s" : "x");
-	else
-		ft_printf((file->sbuf.st_mode & S_ISGID) ? "S" : "-");
-    ft_printf((file->sbuf.st_mode & S_IROTH) ? "r" : "-");
-    ft_printf((file->sbuf.st_mode & S_IWOTH) ? "w" : "-");
-	if (file->sbuf.st_mode & S_IXOTH)
-		ft_printf((file->sbuf.st_mode & S_ISVTX) ? "t" : "x");
-	else
-		ft_printf((file->sbuf.st_mode & S_ISVTX) ? "T" : "-");
-	
+	more_permission(file);
+}
+
+static void	linkinfo(t_file *file)
+{
+	char	linkbuf[1024];
+	int		r;
+
+	r = readlink(file->name, linkbuf, 1024);
+	if (r < 0)
+		ft_printerr("ft_ls: readlink: %s\n", strerror(errno));
+	linkbuf[r] = '\0';
+	ft_printf("%s -> %s\n", file->name + file->path_len, linkbuf);
 }
 
 void		long_print(t_file *file, t_max max)
@@ -64,7 +79,7 @@ void		long_print(t_file *file, t_max max)
 	now = time(0);
 	mtime = file->sbuf.st_mtimespec.tv_sec;
 	permissions(file);
-	ft_printf("  %*d %*s  %*s  %*lld ",max.nlink, file->sbuf.st_nlink,
+	ft_printf("  %*d %-*s  %-*s  %*lld ",max.nlink, file->sbuf.st_nlink,
 			max.user, getpwuid(file->sbuf.st_uid)->pw_name, max.group,
 			getgrgid(file->sbuf.st_gid)->gr_name, max.size,
 			file->sbuf.st_size);
@@ -76,5 +91,8 @@ void		long_print(t_file *file, t_max max)
 		ft_printf("%.7s%5.4s ", date, date + 16);
 	else
 		ft_printf("%.7s%5.5s ", date, date + 7);
-	ft_printf("%s\n", file->name + file->path_len);
+	if (S_ISLNK(file->sbuf.st_mode))
+		linkinfo(file);
+	else
+		ft_printf("%s\n", file->name + file->path_len);
 }

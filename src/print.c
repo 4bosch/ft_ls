@@ -43,10 +43,12 @@ static void	fill_max(t_list **tab, t_max *max)
 	{
 		if (max->nlink < ((t_file*)tab[i]->content)->sbuf.st_nlink)
 			max->nlink = ((t_file*)tab[i]->content)->sbuf.st_nlink;
-		len = ft_strlen(getpwuid(((t_file*)tab[i]->content)->sbuf.st_uid)->pw_name);
+		len = ft_strlen(getpwuid(((t_file*)tab[i]->content)->sbuf.st_uid)
+			->pw_name);
 		if (max->user < len)
 			max->user = len;
-		len = ft_strlen(getgrgid(((t_file*)tab[i]->content)->sbuf.st_gid)->gr_name);
+		len = ft_strlen(getgrgid(((t_file*)tab[i]->content)->sbuf.st_gid)
+			->gr_name);
 		if (max->group < len)
 			max->group = len;
 		if (max->size < ((t_file*)tab[i]->content)->sbuf.st_size)
@@ -59,7 +61,7 @@ static void	fill_max(t_list **tab, t_max *max)
 		max->sum += ((t_file *)tab[i]->content)->sbuf.st_blocks;
 }
 
-void		print_files(t_list **tab, char lf, char dir)
+void		print_files(t_list **tab, char dir, int16_t opt)
 {
 	int	i;
 	t_max	max;
@@ -67,10 +69,11 @@ void		print_files(t_list **tab, char lf, char dir)
 	i = -1;
 	if (tab == NULL)
 		return ;
-	else if (lf)
+	else if (!(O_LFORMAT & opt))
 	{
 		while (tab[++i] != NULL)
-			ft_printf("%s\n", ((t_file*)tab[i]->content)->name + ((t_file*)tab[i]->content)->path_len);
+			ft_printf("%s\n", ((t_file*)tab[i]->content)->name +
+				((t_file*)tab[i]->content)->path_len);
 	}
 	else
 	{

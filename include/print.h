@@ -20,7 +20,7 @@ typedef struct		s_max
 	size_t		sum;
 }			t_max;
 
-void	print_files(t_list **tab, char lf, char dir);
+void	print_files(t_list **tab, char dir, int16_t opt);
 void	long_print(t_file *file, t_max max);
 
 #endif

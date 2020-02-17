@@ -1,29 +1,50 @@
->>>> 00_test_without_opt.spec.c -- [Ok !] ...
->>>> 01_test_opt_R.spec.c -------- [Ok !] .......
->>>> 02_test_sorted.spec.c ------- [Ok !] ...
->>>> 03_test_multiple_dir.spec.c - [Ok !] .....
->>>> 04_test_opt_a.spec.c -------- [Ok !] ..
->>>> 05_test_opt_r.spec.c -------- [Ok !] ...
->>>> 06_test_opt_rR.spec.c ------- [Ok !] ....
->>>> 07_test_opt_t.spec.c -------- [Ok !] .......
->>>> 07_test_opt_tR_bis.spec.c --- [Ok !] .
->>>> 08_test_opt_l.spec.c -------- [Ok !] .......
->>>> 09_test_opt_aR.spec.c ------- [Ok !] ..
->>>> 10_test_opt_aRl.spec.c ------ [Ok !] .
->>>> 11_test_single_file.spec.c -- [Ok !] ..
->>>> 12_test_permissions.spec.c -- [Ok !] ..
->>>> 13_test_hyphen_hard.spec.c -- [Ok !] ........
->>>> 14_test_hyphen_harder.spec.c  [Ok !] ..........
->>>> 20_test_error_handling.spec.c [FAIL] ............FF.......F.FF [FAIL] unitTest_12 -> strcmp(ls_out_str, ft_ls_out_str) == 0
->>>> 21_test_symlink.spec.c ------ [FAIL] F... [FAIL] unitTest_00 -> strcmp(ls(cmd), ft_ls(cmd)) == 0
->>>> 22_test_no_username.spec.c -- [Ok !] .
->>>> 23_test_no_groupname.spec.c - [Ok !] .
->>>> 24_test_multiple_files.spec.c [Ok !] ...
->>>> 25_perm_special_bits.spec.c - [FAIL] .FFFFFFF.FFFFFFF [FAIL] unitTest_01 -> strcmp(ls(cmd), ft_ls(cmd)) == 0
->>>> 26_perm_special_bits_dir.spec [FAIL] .FFFFFF..FFFFFFF [FAIL] unitTest_01 -> strcmp(ls(cmd), ft_ls(cmd)) == 0
->>>> 30_test_opt_mix.spec.c ------ [Ok !] .
->>>> sys_00_test_user_bin.spec.c - [FAIL] F... [FAIL] unitTest_00 -> strcmp(ls(cmd), ft_ls(cmd)) == 0
->>>> sys_01_test_dev.spec.c ------ [FAIL] .FF [FAIL] unitTest_01 -> strcmp(ls(cmd), ft_ls(cmd)) == 0
->>>> sys_02_test_etc.spec.c ------ [FAIL] F [FAIL] unitTest_00 -> strcmp(ls(cmd), ft_ls(cmd)) == 0
->>>> sys_03_test_many_files.spec.c [Ok !] .
->>>> sys_04_test_var_run.spec.c -- [FAIL] F [FAIL] unitTest_00 -> strcmp(ls(cmd), ft_ls(cmd)) == 0
+[33m>>>> [0m00_test_without_opt.spec.c -- [32;1m[Ok !][0m [32;1m.[0m[32;1m.[0m[32;1m.[0m
+[33m>>>> [0m01_test_opt_R.spec.c -------- [32;1m[Ok !][0m [32;1m.[0m[32;1m.[0m[32;1m.[0m[32;1m.[0m[32;1m.[0m[32;1m.[0m[32;1m.[0m
+[33m>>>> [0m02_test_sorted.spec.c ------- [32;1m[Ok !][0m [32;1m.[0m[32;1m.[0m[32;1m.[0m
+[33m>>>> [0m03_test_multiple_dir.spec.c - [32;1m[Ok !][0m [32;1m.[0m[32;1m.[0m[32;1m.[0m[32;1m.[0m[32;1m.[0m
+[33m>>>> [0m04_test_opt_a.spec.c -------- [32;1m[Ok !][0m [32;1m.[0m[32;1m.[0m
+[33m>>>> [0m05_test_opt_r.spec.c -------- [32;1m[Ok !][0m [32;1m.[0m[32;1m.[0m[32;1m.[0m
+[33m>>>> [0m06_test_opt_rR.spec.c ------- [32;1m[Ok !][0m [32;1m.[0m[32;1m.[0m[32;1m.[0m[32;1m.[0m
+[33m>>>> [0m07_test_opt_t.spec.c -------- [31;1m[FAIL][0m [32;1m.[0m[32;1m.[0m[32;1m.[0m[31;1mF[0m[31;1mF[0m[32;1m.[0m[31;1mF[0m[31;1m [FAIL] simple_test_3 -> strcmp(ls(cmd), ft_ls(cmd)) == 0[0m
+[33m>>>> [0m07_test_opt_tR_bis.spec.c --- [32;1m[Ok !][0m [32;1m.[0m
+[33m>>>> [0m08_test_opt_l.spec.c -------- [32;1m[Ok !][0m [32;1m.[0m[32;1m.[0m[32;1m.[0m[32;1m.[0m[32;1m.[0m[32;1m.[0m[32;1m.[0m
+[33m>>>> [0m09_test_opt_aR.spec.c ------- [32;1m[Ok !][0m [32;1m.[0m[32;1m.[0m
+[33m>>>> [0m10_test_opt_aRl.spec.c ------ [32;1m[Ok !][0m [32;1m.[0m
+[33m>>>> [0m11_test_single_file.spec.c -- [32;1m[Ok !][0m [32;1m.[0m[32;1m.[0m
+[33m>>>> [0m12_test_permissions.spec.c -- [32;1m[Ok !][0m [32;1m.[0m[32;1m.[0m
+[33m>>>> [0m13_test_hyphen_hard.spec.c -- [32;1m[Ok !][0m [32;1m.[0m[32;1m.[0m[32;1m.[0m[32;1m.[0m[32;1m.[0m[32;1m.[0m[32;1m.[0m[32;1m.[0m
+[33m>>>> [0m14_test_hyphen_harder.spec.c  [32;1m[Ok !][0m [32;1m.[0m[32;1m.[0m[32;1m.[0m[32;1m.[0m[32;1m.[0m[32;1m.[0m[32;1m.[0m[32;1m.[0m[32;1m.[0m[32;1m.[0m
+[33m>>>> [0m20_test_error_handling.spec.c [31;1m[FAIL][0m [32;1m.[0m[32;1m.[0m[32;1m.[0m[32;1m.[0m[32;1m.[0m[32;1m.[0m[32;1m.[0m[32;1m.[0m[32;1m.[0m[32;1m.[0m[32;1m.[0m[32;1m.[0m[32;1m.[0m[31;1mF[0m[32;1m.[0m[32;1m.[0m[32;1m.[0m[32;1m.[0m[32;1m.[0m[32;1m.[0m[32;1m.[0m[31;1mF[0m[32;1m.[0m[31;1mF[0m[31;1mF[0m[31;1m [FAIL] unitTest_13 -> strcmp(ls_out_str, ft_ls_out_str) == 0[0m
+[33m>>>> [0m21_test_symlink.spec.c ------ [31;1m[FAIL][0m [32;1m.[0m[32;1m.[0m[31;1mF[0m[32;1m.[0m[31;1m [FAIL] unitTest_02 -> strcmp(ls(cmd), ft_ls(cmd)) == 0[0m
+[33m>>>> [0m22_test_no_username.spec.c -- [31;1m[FAIL][0m [31;1mF[0m[31;1m [FAIL] unitTest_00 -> strcmp(ls(cmd), ft_ls(cmd)) == 0[0m
+[33m>>>> [0m23_test_no_groupname.spec.c - [32;1m[Ok !][0m [32;1m.[0m
+[33m>>>> [0m24_test_multiple_files.spec.c [32;1m[Ok !][0m [32;1m.[0m[32;1m.[0m[32;1m.[0m
+[33m>>>> [0m25_perm_special_bits.spec.c - [32;1m[Ok !][0m [32;1m.[0m[32;1m.[0m[32;1m.[0m[32;1m.[0m[32;1m.[0m[32;1m.[0m[32;1m.[0m[32;1m.[0m[32;1m.[0m[32;1m.[0m[32;1m.[0m[32;1m.[0m[32;1m.[0m[32;1m.[0m[32;1m.[0m[32;1m.[0m
+[33m>>>> [0m26_perm_special_bits_dir.spec [32;1m[Ok !][0m [32;1m.[0m[32;1m.[0m[32;1m.[0m[32;1m.[0m[32;1m.[0m[32;1m.[0m[32;1m.[0m[32;1m.[0m[32;1m.[0m[32;1m.[0m[32;1m.[0m[32;1m.[0m[32;1m.[0m[32;1m.[0m[32;1m.[0m[32;1m.[0m
+[33m>>>> [0m30_test_opt_mix.spec.c ------ [32;1m[Ok !][0m [32;1m.[0m
+[33m>>>> [0mbonus_01_test_opt_d.spec.c -- [31;1m[FAIL][0m [31;1mF[0m[31;1mF[0m[31;1mF[0m[31;1mF[0m[31;1mF[0m[31;1mF[0m[31;1mF[0m[31;1mF[0m[31;1mF[0m[31;1mF[0m[31;1m [FAIL] unitTest_00 -> strcmp(ls(cmd), ft_ls(cmd)) == 0[0m
+[33m>>>> [0mbonus_02_test_opt_p.spec.c -- [31;1m[FAIL][0m [31;1mF[0m[31;1mF[0m[31;1mF[0m[31;1mF[0m[31;1mF[0m[31;1m [FAIL] unitTest_00 -> strcmp(ls(cmd), ft_ls(cmd)) == 0[0m
+[33m>>>> [0mbonus_03_test_opt_U.spec.c -- [31;1m[FAIL][0m [31;1mF[0m[31;1mF[0m[31;1mF[0m[31;1m [FAIL] unitTest_00 -> strcmp(ls(cmd), ft_ls(cmd)) == 0[0m
+[33m>>>> [0mbonus_04_test_opt_c.spec.c -- [31;1m[FAIL][0m [31;1mF[0m[31;1mF[0m[31;1mF[0m[31;1mF[0m[31;1mF[0m[31;1mF[0m[31;1mF[0m[31;1m [FAIL] unitTest_00 -> strcmp(ls(cmd), ft_ls(cmd)) == 0[0m
+[33m>>>> [0mbonus_05_test_opt_S.spec.c -- [31;1m[FAIL][0m [31;1mF[0m[31;1mF[0m[31;1mF[0m[31;1mF[0m[31;1mF[0m[31;1m [FAIL] unitTest_00 -> strcmp(ls(cmd), ft_ls(cmd)) == 0[0m
+[33m>>>> [0mbonus_06_test_opt_u.spec.c -- [31;1m[FAIL][0m [31;1mF[0m[31;1mF[0m[31;1mF[0m[31;1mF[0m[31;1mF[0m[31;1mF[0m[31;1mF[0m[31;1mF[0m[31;1mF[0m[31;1mF[0m[31;1mF[0m[31;1mF[0m[31;1mF[0m[31;1mF[0m[31;1mF[0m[31;1mF[0m[31;1mF[0m[31;1mF[0m[31;1mF[0m[31;1mF[0m[31;1mF[0m[31;1mF[0m[31;1m [FAIL] unitTest_00 -> strcmp(ls(cmd), ft_ls(cmd)) == 0[0m
+[33m>>>> [0mbonus_07_test_opt_A.spec.c -- [31;1m[FAIL][0m [31;1mF[0m[31;1mF[0m[31;1mF[0m[31;1mF[0m[31;1m [FAIL] unitTest_00 -> strcmp(ls(cmd), ft_ls(cmd)) == 0[0m
+[33m>>>> [0mbonus_08_test_opt_1.spec.c -- [31;1m[FAIL][0m [31;1mF[0m[32;1m.[0m[31;1m [FAIL] unitTest_00 -> strcmp(ls(cmd), ft_ls(cmd)) == 0[0m
+[33m>>>> [0mbonus_09_test_opt_f.spec.c -- [31;1m[FAIL][0m [31;1mF[0m[31;1mF[0m[31;1m [FAIL] unitTest_00 -> strcmp(ls(cmd), ft_ls(cmd)) == 0[0m
+[33m>>>> [0mbonus_10_test_opt_T.spec.c -- [31;1m[FAIL][0m [31;1mF[0m[31;1m [FAIL] unitTest_00 -> strcmp(ls(cmd), ft_ls(cmd)) == 0[0m
+[33m>>>> [0mbonus_11_test_opt_g.spec.c -- [31;1m[FAIL][0m [31;1mF[0m[31;1mF[0m[31;1mF[0m[31;1m [FAIL] unitTest_00 -> strcmp(ls(cmd), ft_ls(cmd)) == 0[0m
+[33m>>>> [0mbonus_12_test_opt_o_og.spec.c [31;1m[FAIL][0m [31;1mF[0m[31;1mF[0m[31;1mF[0m[31;1mF[0m[31;1m [FAIL] unitTest_00 -> strcmp(ls(cmd), ft_ls(cmd)) == 0[0m
+[33m>>>> [0mbonus_13_test_opt_F_Fp.spec.c [31;1m[FAIL][0m [31;1mF[0m[31;1mF[0m[31;1mF[0m[31;1mF[0m[31;1mF[0m[31;1mF[0m[31;1mF[0m[31;1m [FAIL] unitTest_00 -> strcmp(ls(cmd), ft_ls(cmd)) == 0[0m
+[33m>>>> [0mbonus_20_test_opt_comb_aA.spe [31;1m[FAIL][0m [31;1mF[0m[31;1mF[0m[31;1m [FAIL] unitTest_00 -> strcmp(ls(cmd), ft_ls(cmd)) == 0[0m
+[33m>>>> [0mbonus_21_test_opt_mix_sort.sp [31;1m[FAIL][0m [31;1mF[0m[31;1mF[0m[31;1m [FAIL] unitTest_00 -> strcmp(ls(cmd), ft_ls(cmd)) == 0[0m
+[33m>>>> [0mbonus_22_test_sort_comb.spec. [31;1m[FAIL][0m [31;1mF[0m[31;1mF[0m[31;1mF[0m[31;1mF[0m[31;1mF[0m[31;1mF[0m[31;1mF[0m[31;1mF[0m[31;1mF[0m[31;1mF[0m[31;1mF[0m[31;1mF[0m[31;1m [FAIL] unitTest_00 -> strcmp(ls(cmd), ft_ls(cmd)) == 0[0m
+[33m>>>> [0mbonus_30_test_xattr.spec.c -- [31;1m[FAIL][0m [31;1mF[0m[31;1m [FAIL] unitTest_00 -> strcmp(ls(cmd), ft_ls(cmd)) == 0[0m
+[33m>>>> [0mbonus_31_test_usr_xattr.spec. [31;1m[FAIL][0m [31;1mF[0m[31;1mF[0m[31;1m [FAIL] unitTest_00 -> strcmp(ls(cmd), ft_ls(cmd)) == 0[0m
+[33m>>>> [0mbonus_32_test_ACL.spec.c ---- [31;1m[FAIL][0m [31;1mF[0m[31;1m [FAIL] unitTest_00 -> strcmp(ls(cmd), ft_ls(cmd)) == 0[0m
+[33m>>>> [0mbonus_34_test_redis.spec.c -- [31;1m[FAIL][0m [31;1mF[0m[31;1m [FAIL] unitTest_00 -> strcmp(ls(cmd), ft_ls(cmd)) == 0[0m
+[33m>>>> [0mbonus_40_dir_root.spec.c ---- [32;1m[Ok !][0m [32;1m.[0m
+[33m>>>> [0msys_00_test_user_bin.spec.c - [32;1m[Ok !][0m [32;1m.[0m[32;1m.[0m[32;1m.[0m[32;1m.[0m
+[33m>>>> [0msys_01_test_dev.spec.c ------ [31;1m[FAIL][0m [32;1m.[0m[31;1mF[0m[31;1mF[0m[31;1m [FAIL] unitTest_01 -> strcmp(ls(cmd), ft_ls(cmd)) == 0[0m
+[33m>>>> [0msys_02_test_etc.spec.c ------ [31;1m[FAIL][0m [31;1mF[0m[31;1m [FAIL] unitTest_00 -> strcmp(ls(cmd), ft_ls(cmd)) == 0[0m
+[33m>>>> [0msys_03_test_many_files.spec.c [32;1m[Ok !][0m [32;1m.[0m
+[33m>>>> [0msys_04_test_var_run.spec.c -- [31;1m[FAIL][0m [31;1mF[0m[31;1m [FAIL] unitTest_00 -> strcmp(ls(cmd), ft_ls(cmd)) == 0[0m

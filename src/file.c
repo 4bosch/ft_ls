@@ -6,7 +6,7 @@
 /*   By: abosch <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 13:55:02 by abosch            #+#    #+#             */
-/*   Updated: 2020/02/08 17:14:55 by abosch           ###   ########.fr       */
+/*   Updated: 2020/02/18 15:54:26 by abosch           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,11 @@ static void	fill_file(char *path, char *name, t_file *file)
 	ft_strcat(file->name, name);
 }
 
-static int	file_status(t_file *file, int16_t opt)
+static int	file_status(t_file *file)
 {
-	int			ret;
 	extern int	g_status;
 
-	if (O_LFORMAT & opt && file->name[file->name_len + file->path_len] != '/')
-		ret = lstat(file->name, &file->sbuf);
-	else
-		ret = stat(file->name, &file->sbuf);
-	if(ret == -1)
+	if ((lstat(file->name, &file->sbuf)) == -1)
 	{
 		ft_printerr("ft_ls: %s: %s\n", file->name + file->path_len,
 			strerror(errno));
@@ -42,7 +37,6 @@ static int	file_status(t_file *file, int16_t opt)
 	return (0);
 }
 
-
 void		create_file(char *path, char *name, t_list **list, int16_t opt)
 {
 	t_file	*file;
@@ -52,7 +46,7 @@ void		create_file(char *path, char *name, t_list **list, int16_t opt)
 	if (!(file = (t_file*)malloc(sizeof(t_file))))
 		ft_puterr("Malloc failed\n", 2);
 	fill_file(path, name, file);
-	if (file_status(file, opt))
+	if (file_status(file))
 		return ;
 	if (*list == NULL)
 		*list = ft_lstnew(file, sizeof(t_file));

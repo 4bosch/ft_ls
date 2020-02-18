@@ -6,7 +6,7 @@
 /*   By: abosch <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 13:55:24 by abosch            #+#    #+#             */
-/*   Updated: 2020/02/08 17:55:48 by abosch           ###   ########.fr       */
+/*   Updated: 2020/02/18 15:53:28 by abosch           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,16 @@ static void	active_options(char op, int16_t *opt)
 		*opt |= O_ONE;
 	else
 	{
-		ft_printerr("ft_ls: illegal option -- %c\nusage: ft_ls [-alrRt] [file ...]\n", op);
+		ft_printerr("ft_ls: illegal option -- %c\n"
+			"usage: ft_ls [-alrRt] [file ...]\n", op);
 		exit(1);
 	}
 }
 
-void			get_options(int ac, char **av, int16_t *opt, t_list **input)
+static int	parse_option(int ac, char **av, int16_t *opt)
 {
-	int		i;
-	int		j;
+	int i;
+	int	j;
 
 	i = 0;
 	while (++i < ac && (av[i][0] == '-' && av[i][1] != '\0'))
@@ -50,6 +51,15 @@ void			get_options(int ac, char **av, int16_t *opt, t_list **input)
 		while (av[i][++j] != '\0')
 			active_options(av[i][j], opt);
 	}
+	return (i);
+}
+
+void		get_input(int ac, char **av, int16_t *opt, t_list **input)
+{
+	int		i;
+	int		j;
+
+	i = parse_option(ac, av, opt);
 	if (i == ac)
 	{
 		create_file("", "./", input, *opt);

@@ -6,14 +6,11 @@
 /*   By: abosch <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/02 16:20:18 by abosch            #+#    #+#             */
-/*   Updated: 2020/02/08 17:54:22 by abosch           ###   ########.fr       */
+/*   Updated: 2020/02/18 15:54:47 by abosch           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-
-// CAS D'ERREUR : opendir, closedir, readdir
-// MALLOC A GERER : lstnew, create_file
 
 int	g_status = 0;
 

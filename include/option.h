@@ -14,6 +14,6 @@
 # define O_ONEFILE 128
 # define O_HEADER 256
 
-void	get_options(int ac, char **av, int16_t *opt, t_list **dir);
+void	get_input(int ac, char **av, int16_t *opt, t_list **dir);
 
 #endif

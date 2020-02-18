@@ -6,7 +6,7 @@
 /*   By: abosch <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/02 16:20:27 by abosch            #+#    #+#             */
-/*   Updated: 2020/02/08 17:55:59 by abosch           ###   ########.fr       */
+/*   Updated: 2020/02/18 15:56:32 by abosch           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static void	init_max(t_max *max)
 static int	ilen(size_t nb)
 {
 	int i;
+
 	i = 0;
 	while (nb > 0)
 	{
@@ -36,7 +37,7 @@ static int	ilen(size_t nb)
 static void	fill_max(t_list **tab, t_max *max)
 {
 	int		i;
-	size_t		len;
+	size_t	len;
 
 	i = -1;
 	while (tab[++i] != NULL)
@@ -63,7 +64,7 @@ static void	fill_max(t_list **tab, t_max *max)
 
 void		print_files(t_list **tab, char dir, int16_t opt)
 {
-	int	i;
+	int		i;
 	t_max	max;
 
 	i = -1;

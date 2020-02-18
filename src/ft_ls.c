@@ -6,9 +6,10 @@
 /*   By: abosch <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 18:32:52 by abosch            #+#    #+#             */
-/*   Updated: 2020/02/07 15:57:24 by abosch           ###   ########.fr       */
+/*   Updated: 2020/02/18 14:51:23 by abosch           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "ft_ls.h"
 
 static t_list	**sort(t_list *files, int16_t opt)
@@ -80,7 +81,7 @@ void			list_files(char *path, int pathlen, int16_t *opt, t_list *dir)
 		print_files(tab_files, 1, *opt);
 	else
 		print_files(tab_files, 1, *opt);
-	if(closedir(dirp) == -1)
+	if (closedir(dirp) == -1)
 		ft_puterr("Closedir failed", 2);
 }
 
@@ -108,9 +109,7 @@ void			ft_ls(char **av, int ac)
 	options = 0;
 	dir = NULL;
 	input = NULL;
-	options |= O_ONEFILE;
-	get_options(ac, av, &options, &input);
-	options &= ~O_ONEFILE;
+	get_input(ac, av, &options, &input);
 	move_dir(&input, &dir);
 	print_inputf(input, dir, options);
 	ft_lstquicksort(&dir, &dname_cmp);
@@ -119,7 +118,8 @@ void			ft_ls(char **av, int ac)
 	{
 		if (options & O_HEADER)
 			ft_printf("%s:\n", ((t_dir*)dir->content)->name);
-		list_files(((t_dir*)dir->content)->name, ((t_dir*)dir->content)->name_len
+		list_files(((t_dir*)dir->content)->name, ((t_dir*)dir->content)
+			->name_len
 			+ ((t_dir*)dir->content)->path_len, &options, dir);
 		if (dir->next != NULL)
 			ft_printf("\n");

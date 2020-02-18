@@ -6,7 +6,7 @@
 /*   By: abosch <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 13:54:53 by abosch            #+#    #+#             */
-/*   Updated: 2020/02/08 17:54:04 by abosch           ###   ########.fr       */
+/*   Updated: 2020/02/18 14:48:19 by abosch           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ static void	file2dir(t_list **dir)
 	lst = *dir;
 	while (lst != NULL)
 	{
-		make_dir(((t_file*)lst->content)->name, ((t_file*)lst->content)->path_len, ((t_file*)lst->content)->name_len, &tmp);
+		make_dir(((t_file*)lst->content)->name, ((t_file*)lst->content)
+			->path_len, ((t_file*)lst->content)->name_len, &tmp);
 		free(((t_file*)lst->content)->name);
 		free(lst->content);
 		lst->content = tmp;
@@ -91,4 +92,3 @@ void		create_dir(char *name, int path_len, int name_len, t_list **list)
 		ft_lstadd(list, ft_lstnew(dir, sizeof(t_dir)));
 	free(dir);
 }
-

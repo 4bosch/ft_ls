@@ -6,7 +6,7 @@
 /*   By: abosch <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 13:55:24 by abosch            #+#    #+#             */
-/*   Updated: 2020/02/18 15:53:28 by abosch           ###   ########.fr       */
+/*   Updated: 2020/02/18 17:44:46 by abosch           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void		get_input(int ac, char **av, int16_t *opt, t_list **input)
 {
 	int		i;
 	int		j;
+	t_file	*tmp;
 
 	i = parse_option(ac, av, opt);
 	if (i == ac)
@@ -68,7 +69,12 @@ void		get_input(int ac, char **av, int16_t *opt, t_list **input)
 	j = 0;
 	while (i < ac)
 	{
-		create_file("", av[i], input, *opt);
+		if (!create_file("", av[i], input, *opt))
+		{
+			tmp = (t_file*)(*input)->content;
+			if (!(*opt & O_LFORMAT) && S_ISLNK(tmp->sbuf.st_mode))
+				stat(tmp->name, &(tmp->sbuf));
+		}
 		if (j > 0)
 			*opt |= O_HEADER;
 		i++;

@@ -6,7 +6,7 @@
 /*   By: abosch <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 13:55:02 by abosch            #+#    #+#             */
-/*   Updated: 2020/02/18 15:54:26 by abosch           ###   ########.fr       */
+/*   Updated: 2020/02/18 17:45:08 by abosch           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,20 +37,21 @@ static int	file_status(t_file *file)
 	return (0);
 }
 
-void		create_file(char *path, char *name, t_list **list, int16_t opt)
+int			create_file(char *path, char *name, t_list **list, int16_t opt)
 {
 	t_file	*file;
 
 	if (!(opt & O_ALL) && !(opt & O_ONEFILE) && *name == '.')
-		return ;
+		return (1);
 	if (!(file = (t_file*)malloc(sizeof(t_file))))
 		ft_puterr("Malloc failed\n", 2);
 	fill_file(path, name, file);
 	if (file_status(file))
-		return ;
+		return (1);
 	if (*list == NULL)
 		*list = ft_lstnew(file, sizeof(t_file));
 	else
 		ft_lstadd(list, ft_lstnew(file, sizeof(t_file)));
 	free(file);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: abosch <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 18:32:52 by abosch            #+#    #+#             */
-/*   Updated: 2020/02/18 17:34:56 by abosch           ###   ########.fr       */
+/*   Updated: 2020/02/18 17:52:42 by abosch           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,10 +106,8 @@ void			ft_ls(char **av, int ac)
 	t_list	*dir;
 	t_list	*input;
 
-	options = 0;
 	dir = NULL;
 	input = NULL;
-	options |= O_ONEFILE;
 	get_input(ac, av, &options, &input);
 	options &= ~O_ONEFILE;
 	move_dir(&input, &dir);

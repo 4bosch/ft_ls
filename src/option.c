@@ -6,7 +6,7 @@
 /*   By: abosch <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 13:55:24 by abosch            #+#    #+#             */
-/*   Updated: 2020/02/18 17:44:46 by abosch           ###   ########.fr       */
+/*   Updated: 2020/02/18 17:52:22 by abosch           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ static int	parse_option(int ac, char **av, int16_t *opt)
 	int	j;
 
 	i = 0;
+	*opt = 0;
+	*opt |= O_ONEFILE;
 	while (++i < ac && (av[i][0] == '-' && av[i][1] != '\0'))
 	{
 		if (ft_strcmp(av[i], "--") == 0)

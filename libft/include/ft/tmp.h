@@ -1,24 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   tmp.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abosch <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/06 17:52:34 by abosch            #+#    #+#             */
-/*   Updated: 2019/05/10 15:55:31 by abosch           ###   ########.fr       */
+/*   Created: 2020/02/20 13:15:41 by abosch            #+#    #+#             */
+/*   Updated: 2020/02/20 13:23:36 by abosch           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#ifndef TMP_H
+# define TMP_H
+
+/*
+**tmp
+*/
 # include <string.h>
 # include <unistd.h>
 # include <stdlib.h>
 
 /*
-*LIBC FUNCTIONS
+**gnl
 */
+# define OPEN_MAX 10240
+# define BUF_SIZE 32
+# include <sys/types.h>
+# include <sys/uio.h>
+# include <unistd.h>
+# include "libft.h"
+
+/*
+**printf
+*/
+# include <stdint.h>
+# include <wchar.h>
+
 void			*ft_memset(void *b, int c, size_t len);
 void			ft_bzero(void *s, size_t n);
 void			*ft_memcpy(void *dst, const void *src, size_t n);
@@ -37,7 +54,7 @@ char			*ft_strchr(const char *s, int c);
 char			*ft_strrchr(const char *s, int c);
 char			*ft_strstr(const char *haystack, const char *needle);
 char			*ft_strnstr(const char *haystack, const char *needle,
-				size_t len);
+								size_t len);
 int				ft_strcmp(const char *s1, const char *s2);
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
 int				ft_atoi(const char *str);
@@ -49,9 +66,7 @@ int				ft_isascii(int c);
 int				ft_isprint(int c);
 int				ft_toupper(int c);
 int				ft_tolower(int c);
-/*
-*NONLIBC FUNCTIONS
-*/
+
 void			*ft_memalloc(size_t size);
 void			ft_memdel(void **ap);
 char			*ft_strnew(size_t size);
@@ -65,7 +80,7 @@ int				ft_strequ(char const *s1, char const *s2);
 int				ft_strnequ(char const *s1, char const *s2, size_t n);
 char			*ft_strsub(const char *s, unsigned int start, size_t len);
 char			*ft_strjoin(char const *s1, char const *s2);
-char					*ft_strjoin_free(char const *s1, char const *s2,
+char			*ft_strjoin_free(char const *s1, char const *s2,
 											char c);
 char			*ft_strjoin_free_d(char const *s1, char const *s2, char d);
 char			*ft_strtrim(char const *s);
@@ -79,30 +94,16 @@ void			ft_putchar_fd(char c, int fd);
 void			ft_putstr_fd(char const *s, int fd);
 void			ft_putendl_fd(char const *s, int fd);
 void			ft_putnbr_fd(int n, int fd);
-/*
-*ADDITIONNAL FUNCTIONS
-*/
+
 int				ft_isblank(int c);
 int				ft_isspace(int c);
-/*
-*GET_NEXT_LINE
-*/
-# define OPEN_MAX 10240
-# define BUF_SIZE 32
-# include <sys/types.h>
-# include <sys/uio.h>
-# include <unistd.h>
-# include "libft.h"
 
-int get_next_line(const int fd, char **line);
-/*
-*PRINTF
-*/
-# include <stdint.h>
-# include <wchar.h>
+int				get_next_line(const int fd, char **line);
+
 int				ft_abs(intmax_t *n);
 size_t			ft_count_digits(intmax_t n, uint8_t base);
-void			ft_getnbr_base(size_t value, uint8_t base, char *str, size_t *index);
+void			ft_getnbr_base(size_t value, uint8_t base, char *str,
+								size_t *index);
 int				ft_isprint(int c);
 char			*ft_llitoa(int64_t n);
 char			*ft_llitoa_base(int64_t value, uint8_t base);
@@ -125,10 +126,10 @@ size_t			ft_wstrlen(wchar_t *str);
 int				ft_printf(const char *restrict fmt, ...);
 void			ft_printerr(const char *fmt, ...);
 
-typedef struct			s_string
+typedef struct	s_string
 {
-	char				*str;
-	int					len;
-}						t_string;
+	char		*str;
+	int			len;
+}				t_string;
 
 #endif

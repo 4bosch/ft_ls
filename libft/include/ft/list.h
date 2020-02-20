@@ -6,7 +6,7 @@
 /*   By: abosch <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 14:08:47 by abosch            #+#    #+#             */
-/*   Updated: 2019/10/02 16:52:46 by abosch           ###   ########.fr       */
+/*   Updated: 2020/02/20 13:11:45 by abosch           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,19 @@ typedef struct	s_list
 	struct s_list	*next;
 }				t_list;
 
-t_list	*ft_lstnew(void const *content, size_t content_size);
-void	ft_lstdelone(t_list **alst, void (*del)(void*, size_t));
-void	ft_lstdel(t_list **alst, void (*del)(void *, size_t));
-void	ft_lstadd(t_list **alst, t_list *new);
-void	ft_lstiter(t_list *lst, void (*f)(t_list *elem));
-t_list	*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
-t_list	*ft_lstgeti(t_list *lst, int i);
-int		ft_lstlen(t_list *lst);
-void	ft_lstswap(t_list *lst, int a, int b);
-void	ft_lstquicksort(t_list **lst, int (*cmp)(t_list *e1, t_list *e2));
-t_list	**ft_lstquicksorttab(t_list *lst, int (*cmp)(t_list *e1, t_list *e2));
-void	ft_lstinsert(t_list *lst, t_list *new);
+t_list			*ft_lstnew(void const *content, size_t content_size);
+void			ft_lstdelone(t_list **alst, void (*del)(void*, size_t));
+void			ft_lstdel(t_list **alst, void (*del)(void *, size_t));
+void			ft_lstadd(t_list **alst, t_list *new);
+void			ft_lstiter(t_list *lst, void (*f)(t_list *elem));
+t_list			*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
+t_list			*ft_lstgeti(t_list *lst, int i);
+int				ft_lstlen(t_list *lst);
+void			ft_lstswap(t_list *lst, int a, int b);
+void			ft_lstquicksort(t_list **lst, int (*cmp)(t_list *e1,
+									t_list *e2));
+t_list			**ft_lstquicksorttab(t_list *lst, int (*cmp)(t_list *e1,
+										t_list *e2));
+void			ft_lstinsert(t_list *lst, t_list *new);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: abosch <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/08 13:36:55 by abosch            #+#    #+#              #
-#    Updated: 2020/02/08 16:56:08 by abosch           ###   ########.fr        #
+#    Updated: 2020/02/20 13:01:43 by abosch           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ SRC_STDIO_PATH := $(SRC_PATH)/stdio
 
 OBJ_PATH = obj
 
-INC_PATH = include 
+INC_PATH = include
 #-----------------------#
 
 
@@ -118,6 +118,6 @@ fclean: clean
 
 norme:
 	norminette $(SRC)
-	norminette $(INC_PATH)/*.h
+	norminette $(INC_PATH)
 
 re: fclean all

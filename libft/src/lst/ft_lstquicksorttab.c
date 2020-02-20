@@ -6,7 +6,7 @@
 /*   By: abosch <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/02 16:20:09 by abosch            #+#    #+#             */
-/*   Updated: 2020/02/08 15:16:43 by abosch           ###   ########.fr       */
+/*   Updated: 2020/02/20 12:58:51 by abosch           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,59 +33,33 @@ static t_list	**lst2tab(t_list *lst)
 static void		swap(t_list *e1, t_list *e2)
 {
 	t_list	tmp;
-	
+
 	tmp = *e1;
 	*e1 = *e2;
 	*e2 = tmp;
 }
 
-/*
-static void		print_list(t_list **tab, int low, int high)
-{
-	printf("List state : ");
-	for(int cnt = low; cnt <= high; cnt++)
-		printf("%s, ",((t_dir*)tab[cnt]->content)->name);
-	printf("\n");
-}
-*/
-
-static int		partition(t_list **tab, int low, int high, int (*cmp)(t_list *e1, t_list *e2))
+static int		partition(t_list **tab, int low, int high,
+								int (*cmp)(t_list *e1, t_list *e2))
 {
 	int		i;
 	int		j;
 
-/*
-	printf("---------------------------\nPivot is %s\n", ((t_dir*)tab[low]->content)->name);
-	print_list(tab, low, high);
-	printf("\n");
-*/
-
-	i = low; j = low;
+	i = low;
+	j = low;
 	while (++j <= high)
 	{
 		if (cmp(tab[j], tab[low]))
 		{
 			swap(tab[++i], tab[j]);
-/*
-			printf("swapping : %s | %s\n", ((t_dir*)tab[i]->content)->name, ((t_dir*)tab[j]->content)->name);
-			print_list(tab, low, high);
-*/
 		}
 	}
-/*
-	printf("before pivot swap\n");
-	print_list(tab, low, high);
-*/
 	swap(tab[i], tab[low]);
-/*
-	printf("after pivot swap\n");
-	print_list(tab, low, high);
-	printf("---------------------------\n\n");
-*/
-	return (i);	
+	return (i);
 }
 
-static void		quicksort(t_list **tab, int low, int high, int (*cmp)(t_list *e1, t_list *e2))
+static void		quicksort(t_list **tab, int low, int high,
+								int (*cmp)(t_list *e1, t_list *e2))
 {
 	int	pivot;
 
@@ -97,7 +71,8 @@ static void		quicksort(t_list **tab, int low, int high, int (*cmp)(t_list *e1, t
 	}
 }
 
-t_list			**ft_lstquicksorttab(t_list *lst, int (*cmp)(t_list *e1, t_list *e2))
+t_list			**ft_lstquicksorttab(t_list *lst,
+											int (*cmp)(t_list *e1, t_list *e2))
 {
 	t_list	**tab;
 	int		len;
@@ -106,12 +81,11 @@ t_list			**ft_lstquicksorttab(t_list *lst, int (*cmp)(t_list *e1, t_list *e2))
 	{
 		if ((len = ft_lstlen(lst)) <= 0)
 			return (NULL);
-
 		tab = lst2tab(lst);
 		quicksort(tab, 0, len - 1, cmp);
 		tab[len] = NULL;
 		return (tab);
 	}
 	else
-		return (NULL); 
+		return (NULL);
 }

@@ -6,7 +6,7 @@
 #    By: abosch <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/08 13:36:55 by abosch            #+#    #+#              #
-#    Updated: 2020/02/08 16:55:28 by abosch           ###   ########.fr        #
+#    Updated: 2020/02/20 12:48:30 by abosch           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -101,9 +101,12 @@ fclean: clean lfclean
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 #					OTHER					 #
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
-norme:
+norme: lnorme
 	norminette $(SRC)
 	norminette $(INC_PATH)/*.h
+
+lnorme:
+	make -C $(LIB_PD) norme
 
 re: fclean all
 
